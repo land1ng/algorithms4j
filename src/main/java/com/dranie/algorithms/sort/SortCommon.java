@@ -50,18 +50,18 @@ public abstract class SortCommon implements Sort {
         watch.finishReset();
     }
 
-    private int[] createRandom(int n) {
+    public static int[] createRandom(int n) {
         int[] a = createSorted(n);
         Shuffle.shuffle(a);
         return a;
     }
-    private int[] createSorted(int n) {
+    public static int[] createSorted(int n) {
         int[] a = new int[n];
         for (int i = 0; i < a.length; i++)
             a[i] = i + 1;
         return a;
     }
-    private int[] createInvert(int n) {
+    public static int[] createInvert(int n) {
         int[] a = new int[n];
         for (int i = 0; i < a.length; i++)
             a[i] = n - i;
