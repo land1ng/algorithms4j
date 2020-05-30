@@ -18,6 +18,8 @@ public abstract class SortAdapter implements Sort {
         return a[i] <= a[j];
     }
     public static void exch(int[] a, int i, int j) {
+        // 注意坑：i = j 的时候，相当于自己和自己异或，结果会变成 0。
+        if (i == j) return;
         a[i] ^= a[j];
         a[j] ^= a[i];
         a[i] ^= a[j];
