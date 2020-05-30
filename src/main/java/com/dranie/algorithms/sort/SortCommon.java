@@ -50,6 +50,11 @@ public abstract class SortCommon implements Sort {
         watch.finishReset();
     }
 
+    public static void testPerformance(int n, SortCommon... sorts) {
+        for (SortCommon sort : sorts)
+            sort.testPerformance(n);
+    }
+
     public static int[] createRandom(int n) {
         int[] a = createSorted(n);
         Shuffle.shuffle(a);
