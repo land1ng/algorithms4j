@@ -20,7 +20,7 @@ public class Quick extends SortCommon {
         sort(a, 0, a.length - 1);
     }
 
-    private void sort(int[] a, int lo, int hi) {
+    protected void sort(int[] a, int lo, int hi) {
         if (hi > lo) {
             int pivot = doPartition(a, lo, hi);
             sort(a, lo, pivot - 1);
@@ -28,7 +28,7 @@ public class Quick extends SortCommon {
         }
     }
 
-    private int doPartition(int[] a, int lo, int hi) {
+    protected int doPartition(int[] a, int lo, int hi) {
         int i = lo; // 暂定 lo 为切分点
         int j = hi + 1;
         while (true) {
