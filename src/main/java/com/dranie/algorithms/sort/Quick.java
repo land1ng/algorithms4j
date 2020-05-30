@@ -1,14 +1,12 @@
 package com.dranie.algorithms.sort;
 
-import java.util.Arrays;
-
 /**
  * 单轴快排
  *
  * @author dranfree
  * @since 2020.05.30
  */
-public class Quick extends SortCommon {
+public class Quick extends SortAdapter {
 
     /**
      * 排序数组，数组中每个元素都不为空！
@@ -43,16 +41,5 @@ public class Quick extends SortCommon {
         // 最后 break 的时候，i >= j 的，而 a[j] <= a[lo]，因此将 a[lo] 与 a[j] 交换可以保证 j 左边都小于 a[j]。
         exch(a, lo, j);
         return j;
-    }
-
-    public static void main(String[] args) {
-        int[] a = createRandom(10);
-        System.out.println("b: " + Arrays.toString(a));
-        new Quick().sort(a);
-        System.out.println("a: " + Arrays.toString(a));
-        SortCommon.testPerformance(5000000,
-                new MergeOptimized(),
-                new HeapSort(),
-                new Quick());
     }
 }

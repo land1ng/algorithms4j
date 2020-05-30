@@ -1,7 +1,5 @@
 package com.dranie.algorithms.sort;
 
-import java.util.Arrays;
-
 /**
  * 原地归并：不需要辅助数组
  *
@@ -11,7 +9,7 @@ import java.util.Arrays;
  * @author dranfree
  * @since 2020.05.30
  */
-public class MergeInPlace extends SortCommon {
+public class MergeInPlace extends SortAdapter {
 
     private static final int INSERTION_BOUND = 15;
 
@@ -93,13 +91,5 @@ public class MergeInPlace extends SortCommon {
     private void reverse(int[] a, int x, int y) {
         while (x < y)
             exch(a, x++, y--);
-    }
-
-    public static void main(String[] args) {
-        int[] a = createRandom(11);
-        System.out.println("b: " + Arrays.toString(a));
-        new MergeInPlace().sort(a);
-        System.out.println("a: " + Arrays.toString(a));
-        new MergeInPlace().testPerformance(256000);
     }
 }

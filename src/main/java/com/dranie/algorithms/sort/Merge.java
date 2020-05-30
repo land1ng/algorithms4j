@@ -1,8 +1,7 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.benchmark.BenchmarkUtil;
 import com.dranie.algorithms.utils.Optimizable;
-
-import java.util.Arrays;
 
 /**
  * 自顶向下的归并排序
@@ -11,7 +10,7 @@ import java.util.Arrays;
  * @since 2020.05.30
  */
 @Optimizable
-public class Merge extends SortCommon {
+public class Merge extends SortAdapter {
 
     public void sort(int[] a) {
         sort(a, new int[a.length], 0, a.length - 1);
@@ -52,10 +51,14 @@ public class Merge extends SortCommon {
     }
 
     public static void main(String[] args) {
-        int[] a = {1, 3, -1, 5, 6, -3, 44, -34, 33};
-        new Merge().sort(a);
-        System.out.println("sorted: " + Arrays.toString(a));
-        new Merge().testPerformance(1000000);
-        new MergeOptimized().testPerformance(1000000);
+        BenchmarkUtil.check(new Merge());
+        BenchmarkUtil.benchmark(new Merge());
+        BenchmarkUtil.benchmark(500000,
+                new Merge(),
+                new MergeBU(),
+                new MergeOptimized(),
+                new Quick(),
+                new QuickOptimized(),
+                new HeapSort());
     }
 }

@@ -1,14 +1,12 @@
 package com.dranie.algorithms.sort;
 
-import java.util.Arrays;
-
 /**
  * 堆排序
  *
  * @author dranfree
  * @since 2020.05.30
  */
-public class HeapSort extends SortCommon {
+public class HeapSort extends SortAdapter {
 
     /**
      * 排序数组，数组中每个元素都不为空！
@@ -48,17 +46,5 @@ public class HeapSort extends SortCommon {
                 break;
             k = i;
         }
-    }
-
-    public static void main(String[] args) {
-//        int[] a = createRandom(100);
-//        int[] a = createSorted(100);
-        int[] a = createInvert(100);
-        System.out.println("b: " + Arrays.toString(a));
-        new HeapSort().sort(a);
-        System.out.println("a: " + Arrays.toString(a));
-        SortCommon.testPerformance(1000000,
-                new MergeOptimized(),
-                new HeapSort());
     }
 }

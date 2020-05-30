@@ -117,7 +117,7 @@ public class MaxPQImpl<T extends Comparable<T>> implements MaxPQ<T> {
     }
 
     public static void main(String[] args) {
-        MaxPQ<Integer> maxPQ = new MaxPQImpl<Integer>();
+        MaxPQ<Integer> maxPQ = new MaxPQImpl<>();
         for (int i = 0; i < 50; i++)
             maxPQ.insert(i + 1);
         System.out.println(maxPQ);

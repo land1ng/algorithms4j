@@ -1,7 +1,5 @@
 package com.dranie.algorithms.sort;
 
-import java.util.Arrays;
-
 /**
  * 自底向上的归并排序
  *
@@ -25,14 +23,5 @@ public class MergeBU extends Merge {
                     continue;
                 merge(a, aux, lo, lo + sz -1, Math.min(lo + sz + sz - 1, a.length - 1));
             }
-    }
-
-    public static void main(String[] args) {
-        int[] a = createRandom(10);
-        System.out.println("b: " + Arrays.toString(a));
-        new MergeBU().sort(a);
-        System.out.println("a: " + Arrays.toString(a));
-        SortCommon.testPerformance(5000000,
-                new Merge(), new MergeBU(), new MergeOptimized());
     }
 }
