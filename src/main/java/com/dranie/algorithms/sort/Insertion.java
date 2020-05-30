@@ -22,7 +22,7 @@ public class Insertion extends SortAdapter {
      * @param lo
      * @param hi
      */
-    public void sort(int[] a, int lo, int hi) {
+    public static void sort(int[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++) {
             for (int j = i; j > lo; j--) {
                 if (less(a, j, j - 1)) {

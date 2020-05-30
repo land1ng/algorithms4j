@@ -13,8 +13,6 @@ public class MergeInPlace extends SortAdapter {
 
     private static final int INSERTION_BOUND = 15;
 
-    private static final Insertion INSERTION = new Insertion();
-
     /**
      * 排序数组，数组中每个元素都不为空！
      *
@@ -26,11 +24,11 @@ public class MergeInPlace extends SortAdapter {
 
     private void sort(int[] a, int lo, int hi) {
         // 递归的终止条件：数组长度为1的时候自然就是有序的
-        if (lo >= hi)
-            return;
+//        if (lo >= hi)
+//            return;
         // 优化点1：小数组使用插入排序
         if (lo >= hi - INSERTION_BOUND) {
-            INSERTION.sort(a, lo, hi);
+            Insertion.sort(a, lo, hi);
             return;
         }
         int mi = lo + (hi - lo) / 2;
