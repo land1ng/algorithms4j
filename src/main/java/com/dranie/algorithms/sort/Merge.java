@@ -20,7 +20,7 @@ public class Merge extends SortCommon {
     @Optimizable
     protected void sort(int[] a, int[] aux, int lo, int hi) {
         // 递归的终止条件：数组长度为1的时候自然就是有序的
-        if (lo >= hi - 1)
+        if (lo >= hi)
             return;
         int mi = lo + (hi - lo) / 2;
         sort(a, aux, lo, mi);       // 左半边排序
