@@ -18,6 +18,9 @@ public abstract class SortCommon implements Sort {
     protected boolean less(int[] a, int i, int j) {
         return a[i] < a[j];
     }
+    protected boolean lessEqual(int[] a, int i, int j) {
+        return a[i] <= a[j];
+    }
 
     protected void exch(int[] a, int i, int j) {
         a[i] ^= a[j];
