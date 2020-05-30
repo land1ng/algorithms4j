@@ -20,9 +20,9 @@ public abstract class SortCommon implements Sort {
     }
 
     protected void exch(int[] a, int i, int j) {
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
+        a[i] ^= a[j];
+        a[j] ^= a[i];
+        a[i] ^= a[j];
     }
 
 
