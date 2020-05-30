@@ -18,8 +18,10 @@ public class MergeOptimized extends Merge {
         if (lo >= hi)
             return;
         // 优化点1：小数组使用插入排序
-        if (lo >= hi - INSERTION_BOUND)
+        if (lo >= hi - INSERTION_BOUND) {
             INSERTION.sort(a, lo, hi);
+            return;
+        }
         int mi = lo + (hi - lo) / 2;
         sort(a, aux, lo, mi);       // 左半边排序
         sort(a, aux, mi + 1, hi);   // 右半边排序
