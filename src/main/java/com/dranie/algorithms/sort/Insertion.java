@@ -1,6 +1,8 @@
 package com.dranie.algorithms.sort;
 
 /**
+ * 插入排序的最差情况：反序数组，最好情况：有序数组。
+ *
  * @author dranfree
  * @since 2020.05.30
  */
