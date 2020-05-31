@@ -5,15 +5,14 @@ import com.dranie.algorithms.utils.Optimizable;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 冒泡排序：从左往右遍历，相邻元素比较，较大元素往上冒。
+ * 优化一：判断数组已经有序，提前结束循环。
  *
  * @author dranfree
  * @since 2020.05.31
  */
 @Slf4j
 @Optimizable
-public class Bubble extends SortAdapter {
-
+public class BubbleEarlyTerminated extends Bubble {
     /**
      * 排序数组，数组中每个元素都不为空！
      *
@@ -23,17 +22,23 @@ public class Bubble extends SortAdapter {
     public void sort(int[] a) {
         int count = 0;
         for (int i = a.length - 1; i > 0; i--) {
+            boolean sorted = true;
             for (int j = 0; j < i; j++) {
-                if (less(a, j + 1, j))
-                    exch(a, j + 1, j);
                 count++;
+                if (less(a, j + 1, j)) {
+                    exch(a, j + 1, j);
+                    sorted = false;
+                }
             }
+            if (sorted) break;
         }
         log.debug("循环次数：{}", count);
     }
 
     public static void main(String[] args) {
-        BenchmarkUtil.check(new Bubble());
-        BenchmarkUtil.benchmark(new Bubble());
+        BenchmarkUtil.check(new BubbleEarlyTerminated());
+        BenchmarkUtil.benchmark(10000,
+                new Bubble(),
+                new BubbleEarlyTerminated());
     }
 }

@@ -1,6 +1,7 @@
 package com.dranie.algorithms.sort.benchmark;
 
 import com.dranie.algorithms.sort.Sort;
+import com.dranie.algorithms.utils.Assert;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -55,10 +56,27 @@ public abstract class BenchmarkUtil {
         });
     }
 
+    /**
+     * 使用给定数组做测试
+     *
+     * @param a
+     * @param algos
+     */
+    public static void benchmark(int[] a, Sort... algos) {
+        Arrays.asList(algos).forEach(algo -> {
+            String name = algo.getClass().getSimpleName();
+            int[] az = new int[a.length];
+            System.arraycopy(a, 0, az, 0, a.length);
+            log.info("[{}] 给定数组测试...消耗时间：{}", name, elapsedTime(algo, az));
+        });
+    }
+
     private static long elapsedTime(Sort algo, int[] a) {
-        long before = System.currentTimeMillis();
+        long init = System.currentTimeMillis();
         algo.sort(a);
-        return System.currentTimeMillis() - before;
+        long done = System.currentTimeMillis();
+        Assert.isTrue(SortUtil.isSorted(a));
+        return done - init;
     }
 
 
