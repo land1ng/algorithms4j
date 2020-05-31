@@ -22,7 +22,6 @@ public abstract class BenchmarkUtil {
      */
     public static void benchmark(Sort algo) {
         String name = algo.getClass().getSimpleName();
-        int[] scales = { 100, 1000, 10000, 100000, 1000000 };
         Arrays.asList(100, 1000, 10000, 100000, 1000000).forEach(scale -> {
             log.info("[{}] 性能测试，数据量：{}", name, scale);
             int[] a1 = createRandom(scale);
