@@ -69,6 +69,7 @@ public class MaxPQImpl<T extends Comparable<T>> implements MaxPQ<T> {
      *
      * @param element
      */
+    @Override
     public void insert(T element) {
         checkHeapSize(size + 1);
         heap[++size] = element;
@@ -91,6 +92,7 @@ public class MaxPQImpl<T extends Comparable<T>> implements MaxPQ<T> {
      *
      * @return
      */
+    @Override
     public T max() { return heap[1]; }
 
     /**
@@ -98,6 +100,7 @@ public class MaxPQImpl<T extends Comparable<T>> implements MaxPQ<T> {
      *
      * @return
      */
+    @Override
     public T delMax() {
         T max = heap[1];        // 1.从根节点得到最大元素
         exch(1, size--);        // 2.将其和最后一个节点交换
@@ -106,8 +109,10 @@ public class MaxPQImpl<T extends Comparable<T>> implements MaxPQ<T> {
         return max;
     }
 
+    @Override
     public boolean isEmpty() { return size == 0; }
 
+    @Override
     public int        size() { return size;      }
 
 

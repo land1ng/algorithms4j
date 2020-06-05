@@ -13,6 +13,7 @@ public class Insertion extends SortAdapter {
      *
      * @param a
      */
+    @Override
     public void sort(int[] a) {
         sort(a, 0, a.length - 1);
     }

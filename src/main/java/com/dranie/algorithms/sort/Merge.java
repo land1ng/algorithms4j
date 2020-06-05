@@ -12,6 +12,7 @@ import com.dranie.algorithms.utils.Optimizable;
 @Optimizable
 public class Merge extends SortAdapter {
 
+    @Override
     public void sort(int[] a) {
         sort(a, new int[a.length], 0, a.length - 1);
     }

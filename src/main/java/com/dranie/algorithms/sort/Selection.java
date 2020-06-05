@@ -13,6 +13,7 @@ public class Selection extends SortAdapter {
      *
      * @param a
      */
+    @Override
     public void sort(int[] a) {
         for (int i = 0; i < a.length; i++) {
             int k = i; // 记录右边最小的元素的索引

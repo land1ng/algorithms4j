@@ -13,6 +13,7 @@ public class MergeBU extends Merge {
      *
      * @param a
      */
+    @Override
     public void sort(int[] a) {
         int[] aux = new int[a.length];
         // 关键点：我们直接从最底部长度为1的子数组开始归并，避免了递归的消耗。
