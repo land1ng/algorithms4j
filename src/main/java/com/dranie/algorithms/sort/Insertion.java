@@ -6,7 +6,7 @@ package com.dranie.algorithms.sort;
  * @author dranfree
  * @since 2020.05.30
  */
-public class Insertion extends SortAdapter {
+public class Insertion implements Sort {
 
     /**
      * 排序数组，数组中每个元素都不为空！
@@ -26,10 +26,11 @@ public class Insertion extends SortAdapter {
      * @param hi
      */
     public static void sort(int[] a, int lo, int hi) {
+        Insertion instance = new Insertion();
         for (int i = lo; i <= hi; i++) {
             for (int j = i; j > lo; j--) {
-                if (less(a, j, j - 1)) {
-                    exch(a, j, j - 1);
+                if (instance.less(a, j, j - 1)) {
+                    instance.exch(a, j, j - 1);
                 } else {
                     break;
                 }

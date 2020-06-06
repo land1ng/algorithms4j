@@ -16,7 +16,7 @@ import com.dranie.algorithms.sort.benchmark.BenchmarkUtil;
  * @author dranfree
  * @since 2020.05.31
  */
-public class ShellSort extends SortAdapter {
+public class ShellSort implements Sort {
 
     /**
      * 排序数组，数组中每个元素都不为空！

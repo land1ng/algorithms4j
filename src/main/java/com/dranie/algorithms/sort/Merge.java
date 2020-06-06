@@ -10,7 +10,7 @@ import com.dranie.algorithms.utils.Optimizable;
  * @since 2020.05.30
  */
 @Optimizable
-public class Merge extends SortAdapter {
+public class Merge implements Sort {
 
     @Override
     public void sort(int[] a) {

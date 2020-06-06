@@ -6,7 +6,7 @@ package com.dranie.algorithms.sort;
  * @author dranfree
  * @since 2020.05.30
  */
-public class HeapSort extends SortAdapter {
+public class HeapSort implements Sort {
 
     /**
      * 排序数组，数组中每个元素都不为空！

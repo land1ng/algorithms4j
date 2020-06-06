@@ -9,7 +9,7 @@ package com.dranie.algorithms.sort;
  * @author dranfree
  * @since 2020.05.30
  */
-public class MergeInPlace extends SortAdapter {
+public class MergeInPlace implements Sort {
 
     private static final int INSERTION_BOUND = 15;
 

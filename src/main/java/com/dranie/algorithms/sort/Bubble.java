@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Optimizable
-public class Bubble extends SortAdapter {
+public class Bubble implements Sort {
 
     /**
      * 排序数组，数组中每个元素都不为空！
