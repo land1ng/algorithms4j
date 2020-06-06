@@ -1,6 +1,6 @@
 package com.dranie.algorithms.sort;
 
-import com.dranie.algorithms.sort.benchmark.BenchmarkUtil;
+import com.dranie.algorithms.sort.utils.BenchmarkUtil;
 
 /**
  * 希尔排序：h-sort，从插入排序基础上发展而来。
