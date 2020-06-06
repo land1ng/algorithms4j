@@ -1,6 +1,6 @@
 package com.dranie.algorithms.sort;
 
-import com.dranie.algorithms.sort.benchmark.BenchmarkUtil;
+import com.dranie.algorithms.sort.utils.BenchmarkUtil;
 
 /**
  * 三向切分的快速排序
@@ -12,7 +12,7 @@ import com.dranie.algorithms.sort.benchmark.BenchmarkUtil;
  * @author dranfree
  * @since 2020.05.30
  */
-public class QuickThreeWaySplit extends SortAdapter {
+public class QuickThreeWaySplit implements Sort {
 
     private static final int INSERTION_BOUND = 16;
 
@@ -21,6 +21,7 @@ public class QuickThreeWaySplit extends SortAdapter {
      *
      * @param a
      */
+    @Override
     public void sort(int[] a) {
         sort(a, 0, a.length - 1);
     }
