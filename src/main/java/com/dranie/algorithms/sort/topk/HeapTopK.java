@@ -1,7 +1,6 @@
 package com.dranie.algorithms.sort.topk;
 
 import com.dranie.algorithms.sort.utils.HeapUtil;
-import com.dranie.algorithms.sort.utils.SortUtil;
 import edu.princeton.cs.algs4.In;
 
 import java.io.File;
