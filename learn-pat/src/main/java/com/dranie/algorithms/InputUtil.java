@@ -14,9 +14,9 @@ public abstract class InputUtil {
 
     public static final BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
 
-    public static int readInt() {
-        return Integer.parseInt(line());
-    }
+    public static int readInt() { return Integer.parseInt(line()); }
+
+    public static String readString() { return line(); }
 
     private static String line() {
         try {
