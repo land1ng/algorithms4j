@@ -2,6 +2,8 @@ package com.dranie.algorithms.bpat;
 
 import com.dranie.algorithms.InputUtil;
 
+import java.util.Scanner;
+
 /**
  * 卡拉兹(Callatz)猜想：
  *
@@ -21,7 +23,8 @@ import com.dranie.algorithms.InputUtil;
 public class Q1001CallatzGuess {
 
     public static void main(String[] args) {
-        int n = InputUtil.readInt();
+//        int n = InputUtil.readInt();
+        int n = new Scanner(System.in).nextInt();
         int c = 0;
         while (n > 1) {
             n = cutoff(n);
