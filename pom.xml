@@ -6,7 +6,11 @@
 
     <groupId>com.dranie.algorithms</groupId>
     <artifactId>algorithms4j</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>learn-pat</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
