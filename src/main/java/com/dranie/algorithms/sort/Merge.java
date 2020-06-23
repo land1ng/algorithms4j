@@ -1,6 +1,6 @@
 package com.dranie.algorithms.sort;
 
-import com.dranie.algorithms.sort.benchmark.BenchmarkUtil;
+import com.dranie.algorithms.sort.utils.BenchmarkUtil;
 import com.dranie.algorithms.utils.Optimizable;
 
 /**
@@ -10,8 +10,9 @@ import com.dranie.algorithms.utils.Optimizable;
  * @since 2020.05.30
  */
 @Optimizable
-public class Merge extends SortAdapter {
+public class Merge implements Sort {
 
+    @Override
     public void sort(int[] a) {
         sort(a, new int[a.length], 0, a.length - 1);
     }

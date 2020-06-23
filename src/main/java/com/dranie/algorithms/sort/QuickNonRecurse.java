@@ -1,6 +1,6 @@
 package com.dranie.algorithms.sort;
 
-import com.dranie.algorithms.sort.benchmark.BenchmarkUtil;
+import com.dranie.algorithms.sort.utils.BenchmarkUtil;
 
 import java.util.Stack;
 
