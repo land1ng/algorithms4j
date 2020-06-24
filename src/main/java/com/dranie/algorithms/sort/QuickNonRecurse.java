@@ -2,7 +2,8 @@ package com.dranie.algorithms.sort;
 
 import com.dranie.algorithms.sort.utils.BenchmarkUtil;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * 非递归快速排序（性能比递归实现快一些）：
@@ -32,10 +33,10 @@ public class QuickNonRecurse extends Quick {
 
     @Override
     protected void sort(int[] a, int lo, int hi) {
-        Stack<Block> stack = new Stack<>();
+        Deque<Block> stack = new LinkedList<>();
         stack.push(new Block(lo, hi));
         Block block;
-        while (!stack.empty() && (block = stack.pop()) != null) {
+        while (!stack.isEmpty() && (block = stack.pop()) != null) {
             int l = block.lo;
             int h = block.hi;
             if (h <= l + INSERTION_BOUND) {
