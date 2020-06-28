@@ -114,31 +114,29 @@ public abstract class BenchmarkUtil {
      *
      * @param algo
      */
-    public static void check(Sort algo) {
+    public static boolean check(Sort algo) {
         int n = 20;
         String name = algo.getClass().getSimpleName();
-        int[] a1 = createRandom(n);
-        log.info("[{}] 正确性测试，{}数组...排序之前：{}", name, "随机", a1);
-        algo.sort(a1);
-        showResult(a1, name, "随机");
-        int[] a2 = createSorted(n);
-        log.info("[{}] 正确性测试，{}数组...排序之前：{}", name, "有序", a2);
-        algo.sort(a2);
-        showResult(a2, name, "有序");
-        int[] a3 = createInvert(n);
-        log.info("[{}] 正确性测试，{}数组...排序之前：{}", name, "反序", a3);
-        algo.sort(a3);
-        showResult(a3, name, "反序");
-        int[] a4 = createEquals(n);
-        log.info("[{}] 正确性测试，{}数组...排序之前：{}", name, "等值", a4);
-        algo.sort(a4);
-        showResult(a4, name, "等值");
+        boolean c1 = check(algo, createRandom(n), name, "随机");
+        boolean c2 = check(algo, createSorted(n), name, "有序");
+        boolean c3 = check(algo, createInvert(n), name, "反序");
+        boolean c4 = check(algo, createEquals(n), name, "等值");
+        return c1 && c2 && c3 && c4;
     }
-    private static void showResult(int[] a, String name, String tag) {
-        if (SortUtil.isSorted(a))
+    private static boolean check(Sort algo, int[] a, String name, String tag) {
+        log.info("[{}] 正确性测试，{}数组...排序之前：{}", name, "等值", a);
+        algo.sort(a);
+        if (SortUtil.isSorted(a)) {
             log.info("[{}] 正确性测试，{}数组...排序成功：{}", name, tag, a);
-        else
+            return true;
+        } else {
             log.error("[{}] 正确性测试，{}数组...排序错误：{}", name, tag, a);
+            return false;
+        }
+    }
+    public static void logCheckFailed(Sort algo) {
+        String name = algo.getClass().getSimpleName();
+        log.error("[{}] 正确性测试未通过...", name);
     }
 
 
