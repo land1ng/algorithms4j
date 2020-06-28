@@ -25,12 +25,10 @@ public abstract class BenchmarkUtil {
      * @param algo
      */
     public static void benchmark(final Sort algo) {
+        if (!checkSilent(algo))
+            return;
         Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000)
-                .forEach(scale -> {
-                    if (!checkSilent(algo))
-                        return;
-                    benchmark0(algo, scale);
-                });
+                .forEach(scale -> benchmark0(algo, scale));
     }
 
     /**
