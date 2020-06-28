@@ -2,7 +2,6 @@ package com.dranie.algorithms.sort.utils;
 
 import com.dranie.algorithms.sort.Shuffle;
 import com.dranie.algorithms.sort.Sort;
-import com.dranie.algorithms.utils.Assert;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -17,24 +16,21 @@ import java.util.Random;
 @Slf4j
 public abstract class BenchmarkUtil {
 
+
+    private static String name(final Sort algo) { return algo.getClass().getSimpleName(); }
+
     /**
      * 单个算法性能测试
      *
      * @param algo
      */
-    public static void benchmark(Sort algo) {
-        String name = algo.getClass().getSimpleName();
-        Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
-            log.info("[{}] 性能测试，数据量：{}", name, scale);
-            int[] a1 = createRandom(scale);
-            log.info("[{}] 随机...消耗时间：{}", name, elapsedTime(algo, a1));
-            int[] a2 = createSorted(scale);
-            log.info("[{}] 有序...消耗时间：{}", name, elapsedTime(algo, a2));
-            int[] a3 = createInvert(scale);
-            log.info("[{}] 反序...消耗时间：{}", name, elapsedTime(algo, a3));
-            int[] a4 = createEquals(scale);
-            log.info("[{}] 等值...消耗时间：{}", name, elapsedTime(algo, a4));
-        });
+    public static void benchmark(final Sort algo) {
+        Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000)
+                .forEach(scale -> {
+                    if (!checkSilent(algo))
+                        return;
+                    benchmark0(algo, scale);
+                });
     }
 
     /**
@@ -43,46 +39,23 @@ public abstract class BenchmarkUtil {
      * @param scale 数据量
      * @param algos 算法列表
      */
-    public static void benchmark(int scale, Sort... algos) {
+    public static void benchmark(final int scale, final Sort... algos) {
         Arrays.asList(algos).forEach(algo -> {
-            String name = algo.getClass().getSimpleName();
-            int[] a1 = createRandom(scale);
-            log.info("[{}] 性能测试，随机...消耗时间：{}", name, elapsedTime(algo, a1));
-            int[] a2 = createSorted(scale);
-            log.info("[{}] 性能测试，有序...消耗时间：{}", name, elapsedTime(algo, a2));
-            int[] a3 = createInvert(scale);
-            log.info("[{}] 性能测试，反序...消耗时间：{}", name, elapsedTime(algo, a3));
-            int[] a4 = createEquals(scale);
-            log.info("[{}] 性能测试，等值...消耗时间：{}", name, elapsedTime(algo, a4));
+            if (!checkSilent(algo))
+                return;
+            benchmark0(algo, scale);
         });
     }
 
-    /**
-     * 和 JDK 自带排序进行比较
-     *
-     * @param algo
-     */
-    public static void fuckingJDK(Sort algo) {
-        String name = algo.getClass().getSimpleName();
-        Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
-            log.info("[{}] 性能测试，数据量：{}", name, scale);
-            int[] a1 = createRandom(scale);
-            int[] a1_ = new int[a1.length];
-            System.arraycopy(a1, 0, a1_, 0, a1.length);
-            log.info("[{}] 随机...You:{}, JDK:{}", name, elapsedTime(algo, a1), elapsedTime(Arrays::sort, a1_));
-            int[] a2 = createSorted(scale);
-            int[] a2_ = new int[a2.length];
-            System.arraycopy(a2, 0, a2_, 0, a2.length);
-            log.info("[{}] 有序...You:{}, JDK:{}", name, elapsedTime(algo, a2), elapsedTime(Arrays::sort, a2_));
-            int[] a3 = createInvert(scale);
-            int[] a3_ = new int[a3.length];
-            System.arraycopy(a3, 0, a3_, 0, a3.length);
-            log.info("[{}] 反序...You:{}, JDK:{}", name, elapsedTime(algo, a3), elapsedTime(Arrays::sort, a3_));
-            int[] a4 = createEquals(scale);
-            int[] a4_ = new int[a4.length];
-            System.arraycopy(a4, 0, a4_, 0, a4.length);
-            log.info("[{}] 等值...You:{}, JDK:{}", name, elapsedTime(algo, a4), elapsedTime(Arrays::sort, a4_));
-        });
+    private static void benchmark0(final Sort algo, final int scale) {
+        log.info("[{}] 性能测试，数据量：{}", name(algo), scale);
+        benchmark1(algo, createRandom(scale));
+        benchmark1(algo, createSorted(scale));
+        benchmark1(algo, createInvert(scale));
+        benchmark1(algo, createEquals(scale));
+    }
+    private static void benchmark1(final Sort algo, final Sample sample) {
+        log.info("[{}] 性能测试，{}...消耗时间：{}", name(algo), sample.name, elapsedTime(algo, sample.data));
     }
 
     /**
@@ -91,20 +64,58 @@ public abstract class BenchmarkUtil {
      * @param a
      * @param algos
      */
-    public static void benchmark(int[] a, Sort... algos) {
+    public static void benchmark(final int[] a, final Sort... algos) {
         Arrays.asList(algos).forEach(algo -> {
-            String name = algo.getClass().getSimpleName();
-            int[] az = new int[a.length];
-            System.arraycopy(a, 0, az, 0, a.length);
-            log.info("[{}] 给定数组测试...消耗时间：{}", name, elapsedTime(algo, az));
+            if (!checkSilent(algo))
+                return;
+            int[] copy = new int[a.length];
+            System.arraycopy(a, 0, copy, 0, a.length);
+            log.info("[{}] 给定数组测试...消耗时间：{}", name(algo), elapsedTime(algo, copy));
         });
     }
 
-    private static long elapsedTime(Sort algo, int[] a) {
+    /**
+     * 和 JDK 自带排序进行比较
+     *
+     * @param algo
+     */
+    public static void fuckingJDK(final Sort algo) {
+        if (!checkSilent(algo))
+            return;
+        Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
+            log.info("[{}] Fucking JDK! 数据量: {}", name(algo), scale);
+            int score = 0;
+            score += fuckingJDK0(algo, createRandom(scale));
+            score += fuckingJDK0(algo, createSorted(scale));
+            score += fuckingJDK0(algo, createInvert(scale));
+            score += fuckingJDK0(algo, createEquals(scale));
+            String ret;
+            if (score == 4 - score) {
+                ret = "打成平局！";
+            } else {
+                if (score > 4 - score)
+                    ret = "你赢了！";
+                else
+                    ret = "你输了！";
+            }
+            log.info("[{}] Fucking JDK! {}:{}, {}", name(algo), score, 4 - score, ret);
+        });
+    }
+    private static int fuckingJDK0(final Sort algo, final Sample sample) {
+        int[] data = sample.data;
+        int[] copy = new int[data.length];
+        System.arraycopy(data, 0, copy, 0, data.length);
+        long time4You = elapsedTime(algo, data);
+        long time4Jdk = elapsedTime(Arrays::sort, copy);
+        log.info("[{}] {}...You cost {}ms, Jdk cost {}ms.", name(algo), sample.name, time4You, time4Jdk);
+        return time4Jdk > time4You ? 1 : 0;
+    }
+
+
+    private static long elapsedTime(final Sort algo, final int[] a) {
         long init = System.currentTimeMillis();
         algo.sort(a);
         long done = System.currentTimeMillis();
-        Assert.isTrue(SortUtil.isSorted(a));
         return done - init;
     }
 
@@ -114,52 +125,71 @@ public abstract class BenchmarkUtil {
      *
      * @param algo
      */
-    public static boolean check(Sort algo) {
-        int n = 20;
-        String name = algo.getClass().getSimpleName();
-        boolean c1 = check(algo, createRandom(n), name, "随机");
-        boolean c2 = check(algo, createSorted(n), name, "有序");
-        boolean c3 = check(algo, createInvert(n), name, "反序");
-        boolean c4 = check(algo, createEquals(n), name, "等值");
-        return c1 && c2 && c3 && c4;
+    public static boolean check(final Sort algo) { return check(algo, 20); }
+    public static boolean check(final Sort algo, final int n) {
+        boolean c1 = check0(algo, createRandom(n));
+        boolean c2 = check0(algo, createSorted(n));
+        boolean c3 = check0(algo, createInvert(n));
+        boolean c4 = check0(algo, createEquals(n));
+        if (c1 && c2 && c3 && c4)
+            return true;
+        else
+            logCheckFailed(algo);
+        return false;
     }
-    private static boolean check(Sort algo, int[] a, String name, String tag) {
-        log.info("[{}] 正确性测试，{}数组...排序之前：{}", name, "等值", a);
-        algo.sort(a);
-        if (SortUtil.isSorted(a)) {
-            log.info("[{}] 正确性测试，{}数组...排序成功：{}", name, tag, a);
+    private static boolean check0(final Sort algo, final Sample sample) {
+        log.info("[{}] 正确性测试，{}数组...排序之前：{}", name(algo), sample.name, sample.data);
+        algo.sort(sample.data);
+        if (SortUtil.isSorted(sample.data)) {
+            log.info("[{}] 正确性测试，{}数组...排序成功：{}", name(algo), sample.name, sample.data);
             return true;
         } else {
-            log.error("[{}] 正确性测试，{}数组...排序错误：{}", name, tag, a);
+            log.error("[{}] 正确性测试，{}数组...排序错误：{}", name(algo), sample.name, sample.data);
             return false;
         }
     }
-    public static void logCheckFailed(Sort algo) {
-        String name = algo.getClass().getSimpleName();
-        log.error("[{}] 正确性测试未通过...", name);
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    private static boolean checkSilent(final Sort algo) {
+        int n = 20;
+        boolean c1 = checkSilent0(algo, createRandom(n));
+        boolean c2 = checkSilent0(algo, createSorted(n));
+        boolean c3 = checkSilent0(algo, createInvert(n));
+        boolean c4 = checkSilent0(algo, createEquals(n));
+        if (c1 && c2 && c3 && c4)
+            return true;
+        else
+            logCheckFailed(algo);
+        return false;
+    }
+    private static boolean checkSilent0(final Sort algo, final Sample sample) {
+        algo.sort(sample.data);
+        return SortUtil.isSorted(sample.data);
+    }
+    private static void logCheckFailed(final Sort algo) {
+        log.error("[{}] 算法错误...", name(algo));
     }
 
 
-    private static int[] createRandom(int n) {
-        int[] a = createSorted(n);
-        Shuffle.shuffle(a);
-        return a;
+    private static Sample createRandom(final int n) {
+        Sample bd = createSorted(n);
+        Shuffle.shuffle(bd.data);
+        return Sample.builder().data(bd.data).name("乱序").build();
     }
-    private static int[] createSorted(int n) {
+    private static Sample createSorted(final int n) {
         int[] a = new int[n];
         for (int i = 0; i < a.length; i++)
             a[i] = i + 1;
-        return a;
+        return Sample.builder().data(a).name("有序").build();
     }
-    private static int[] createInvert(int n) {
+    private static Sample createInvert(final int n) {
         int[] a = new int[n];
         for (int i = 0; i < a.length; i++)
             a[i] = n - i;
-        return a;
+        return Sample.builder().data(a).name("逆序").build();
     }
-    private static int[] createEquals(int n) {
+    private static Sample createEquals(final int n) {
         int[] a = new int[n];
         Arrays.fill(a, new Random().nextInt(n));
-        return a;
+        return Sample.builder().data(a).name("等值").build();
     }
 }

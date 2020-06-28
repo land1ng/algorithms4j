@@ -34,9 +34,7 @@ public interface Sort {
     }
 
     default void benchmark() {
-        if (!BenchmarkUtil.check(this)) {
-            BenchmarkUtil.logCheckFailed(this);
-        } else {
+        if (BenchmarkUtil.check(this)) {
             BenchmarkUtil.benchmark(this);
             BenchmarkUtil.fuckingJDK(this);
         }
