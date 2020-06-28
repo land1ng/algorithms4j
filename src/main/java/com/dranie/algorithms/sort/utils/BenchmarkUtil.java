@@ -23,7 +23,7 @@ public abstract class BenchmarkUtil {
      */
     public static void benchmark(Sort algo) {
         String name = algo.getClass().getSimpleName();
-        Arrays.asList(100, 1000, 10000, 100000, 1000000).forEach(scale -> {
+        Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
             log.info("[{}] 性能测试，数据量：{}", name, scale);
             int[] a1 = createRandom(scale);
             log.info("[{}] 随机...消耗时间：{}", name, elapsedTime(algo, a1));
@@ -63,7 +63,7 @@ public abstract class BenchmarkUtil {
      */
     public static void fuckingJDK(Sort algo) {
         String name = algo.getClass().getSimpleName();
-        Arrays.asList(100, 1000, 10000, 100000, 1000000).forEach(scale -> {
+        Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
             log.info("[{}] 性能测试，数据量：{}", name, scale);
             int[] a1 = createRandom(scale);
             int[] a1_ = new int[a1.length];
