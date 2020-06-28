@@ -1,5 +1,6 @@
 package com.dranie.algorithms.sort.utils;
 
+import com.dranie.algorithms.sort.Shuffle;
 import com.dranie.algorithms.sort.Sort;
 import com.dranie.algorithms.utils.Assert;
 import lombok.extern.slf4j.Slf4j;
@@ -142,12 +143,9 @@ public abstract class BenchmarkUtil {
 
 
     private static int[] createRandom(int n) {
-        Random rnd = new Random();
-        int[] data = new int[n];
-        for (int i = 0; i < data.length; i++) {
-            data[i] = rnd.nextInt(n);
-        }
-        return data;
+        int[] a = createSorted(n);
+        Shuffle.shuffle(a);
+        return a;
     }
     private static int[] createSorted(int n) {
         int[] a = new int[n];
