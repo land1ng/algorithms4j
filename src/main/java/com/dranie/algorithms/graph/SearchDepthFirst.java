@@ -1,14 +1,14 @@
 package com.dranie.algorithms.graph;
 
 /**
- * 深度优先搜索
+ * 深度优先搜索：找到和某顶点连通的所有顶点
  *
  * @author dranfree
  * @since 2020.06.02
  */
 public class SearchDepthFirst implements Search {
 
-    private boolean[] marked;
+    private final boolean[] marked;
     private int count;
 
     /**
@@ -18,7 +18,8 @@ public class SearchDepthFirst implements Search {
      * @param s
      */
     public SearchDepthFirst(Graph G, int s) {
-
+        marked = new boolean[G.v()];
+        dfs(G, s);
     }
 
     private void dfs(Graph G, int v) {
