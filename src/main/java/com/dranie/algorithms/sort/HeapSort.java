@@ -1,5 +1,7 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.utils.BenchmarkUtil;
+
 /**
  * 堆排序
  *
@@ -47,5 +49,9 @@ public class HeapSort implements Sort {
                 break;
             k = i;
         }
+    }
+
+    public static void main(String[] args) {
+        new HeapSort().benchmark();
     }
 }

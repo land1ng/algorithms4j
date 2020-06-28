@@ -1,5 +1,7 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.utils.BenchmarkUtil;
+
 /**
  * 排序接口
  *
@@ -29,5 +31,11 @@ public interface Sort {
         a[i] ^= a[j];
         a[j] ^= a[i];
         a[i] ^= a[j];
+    }
+
+    default void benchmark() {
+        BenchmarkUtil.check(this);
+        BenchmarkUtil.benchmark(this);
+        BenchmarkUtil.fuckingJDK(this);
     }
 }
