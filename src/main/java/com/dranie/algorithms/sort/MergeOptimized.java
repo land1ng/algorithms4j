@@ -1,5 +1,7 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.utils.BenchmarkUtil;
+
 /**
  * 归并排序的几个优化
  *
@@ -8,7 +10,7 @@ package com.dranie.algorithms.sort;
  */
 public class MergeOptimized extends Merge {
 
-    private static final int INSERTION_BOUND = 15;
+    protected static final int INSERTION_BOUND = 15;
 
     @Override
     protected void sort(int[] a, int[] aux, int lo, int hi) {
@@ -27,5 +29,10 @@ public class MergeOptimized extends Merge {
         if (less(a, mi, mi + 1))
             return;
         merge(a, aux, lo, mi, hi);  // 合并子数组
+    }
+
+    public static void main(String[] args) {
+        BenchmarkUtil.check(new MergeOptimized());
+        BenchmarkUtil.fuckingJDK(new MergeOptimized());
     }
 }

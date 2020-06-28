@@ -57,6 +57,34 @@ public abstract class BenchmarkUtil {
     }
 
     /**
+     * 和 JDK 自带排序进行比较
+     *
+     * @param algo
+     */
+    public static void fuckingJDK(Sort algo) {
+        String name = algo.getClass().getSimpleName();
+        Arrays.asList(100, 1000, 10000, 100000, 1000000).forEach(scale -> {
+            log.info("[{}] 性能测试，数据量：{}", name, scale);
+            int[] a1 = createRandom(scale);
+            int[] a1_ = new int[a1.length];
+            System.arraycopy(a1, 0, a1_, 0, a1.length);
+            log.info("[{}] 随机...You:{}, JDK:{}", name, elapsedTime(algo, a1), elapsedTime(Arrays::sort, a1_));
+            int[] a2 = createSorted(scale);
+            int[] a2_ = new int[a2.length];
+            System.arraycopy(a2, 0, a2_, 0, a2.length);
+            log.info("[{}] 有序...You:{}, JDK:{}", name, elapsedTime(algo, a2), elapsedTime(Arrays::sort, a2_));
+            int[] a3 = createInvert(scale);
+            int[] a3_ = new int[a3.length];
+            System.arraycopy(a3, 0, a3_, 0, a3.length);
+            log.info("[{}] 反序...You:{}, JDK:{}", name, elapsedTime(algo, a3), elapsedTime(Arrays::sort, a3_));
+            int[] a4 = createEquals(scale);
+            int[] a4_ = new int[a4.length];
+            System.arraycopy(a4, 0, a4_, 0, a4.length);
+            log.info("[{}] 等值...You:{}, JDK:{}", name, elapsedTime(algo, a4), elapsedTime(Arrays::sort, a4_));
+        });
+    }
+
+    /**
      * 使用给定数组做测试
      *
      * @param a
