@@ -16,7 +16,7 @@ import com.dranie.algorithms.sort.utils.BenchmarkUtil;
  * @author dranfree
  * @since 2020.05.31
  */
-public class ShellSort implements Sort {
+public class ShellSort implements CompareBasedSort {
 
     /**
      * 排序数组，数组中每个元素都不为空！

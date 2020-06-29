@@ -12,7 +12,7 @@ import com.dranie.algorithms.sort.utils.BenchmarkUtil;
  * @author dranfree
  * @since 2020.05.30
  */
-public class QuickThreeWaySplit implements Sort {
+public class QuickThreeWaySplit implements CompareBasedSort {
 
     private static final int INSERTION_BOUND = 16;
 

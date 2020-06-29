@@ -6,7 +6,7 @@ package com.dranie.algorithms.sort;
  * @author dranfree
  * @since 2020.05.30
  */
-public class Insertion implements Sort {
+public class Insertion implements CompareBasedSort {
 
     /**
      * 排序数组，数组中每个元素都不为空！

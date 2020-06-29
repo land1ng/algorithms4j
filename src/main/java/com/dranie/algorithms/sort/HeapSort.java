@@ -1,14 +1,12 @@
 package com.dranie.algorithms.sort;
 
-import com.dranie.algorithms.sort.utils.BenchmarkUtil;
-
 /**
  * 堆排序
  *
  * @author dranfree
  * @since 2020.05.30
  */
-public class HeapSort implements Sort {
+public class HeapSort implements CompareBasedSort {
 
     /**
      * 排序数组，数组中每个元素都不为空！
