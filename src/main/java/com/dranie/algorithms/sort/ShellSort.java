@@ -31,11 +31,15 @@ public class ShellSort implements CompareBasedSort {
         while (h > 0) {
             for (int i = h; i < len; i++) {
                 // 对于每个间隔为 h 的子数组使用插入排序
-                for (int j = i; j >= h && less(a, j, j - h); j -= h)
-                    exch(a, j, j - h);
+                sort0(a, i, h);
             }
             h /= 3;
         }
+    }
+
+    protected void sort0(int[] a, int i, int h) {
+        for (int j = i; j >= h && less(a, j, j - h); j -= h)
+            exch(a, j, j - h);
     }
 
     public static void main(String[] args) {
