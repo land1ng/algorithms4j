@@ -12,8 +12,8 @@ public class CycleGraph {
     private boolean   hasCycle;
 
     public CycleGraph(Graph G) {
-        marked = new boolean[G.v()];
-        for (int s = 0; s < G.v(); s++)
+        marked = new boolean[G.V()];
+        for (int s = 0; s < G.V(); s++)
             if (!marked[s])
                 dfs(G, s, s);
     }

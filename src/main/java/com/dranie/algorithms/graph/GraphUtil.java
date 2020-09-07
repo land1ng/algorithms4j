@@ -15,7 +15,7 @@ public abstract class GraphUtil {
      * @param v
      * @return
      */
-    public static int degree(GraphImpl G, int v) {
+    public static int degree(Graph G, int v) {
         int degree = 0;
         for (int w : G.adj(v))
             degree++;
@@ -28,9 +28,9 @@ public abstract class GraphUtil {
      * @param G
      * @return
      */
-    public static int maxDegree(GraphImpl G) {
+    public static int maxDegree(Graph G) {
         int max = 0;
-        for (int v = 0; v < G.v(); v++) {
+        for (int v = 0; v < G.V(); v++) {
             int current = degree(G, v);
             if (current > max)
                 max = current;
@@ -44,8 +44,8 @@ public abstract class GraphUtil {
      * @param G
      * @return
      */
-    public static double avgDegree(GraphImpl G) {
-        return 2.0 * G.e() / G.v();
+    public static double avgDegree(Graph G) {
+        return 2.0 * G.E() / G.V();
     }
 
     /**
@@ -54,9 +54,9 @@ public abstract class GraphUtil {
      * @param G
      * @return
      */
-    public static int countSelfLoops(GraphImpl G) {
+    public static int countSelfLoops(Graph G) {
         int count = 0;
-        for (int v = 0; v < G.v(); v++) {
+        for (int v = 0; v < G.V(); v++) {
             for (int w : G.adj(v)) {
                 if (v == w)
                     count++;

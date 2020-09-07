@@ -1,7 +1,7 @@
 package com.dranie.algorithms.graph;
 
 import edu.princeton.cs.algs4.Bag;
-import edu.princeton.cs.algs4.In;
+import com.dranie.algorithms.utils.In;
 
 /**
  * 无向图的邻接表数组实现
@@ -36,9 +36,9 @@ public class GraphImpl implements Graph {
     }
 
     @Override
-    public int v() { return V; }
+    public int V() { return V; }
     @Override
-    public int e() { return E; }
+    public int E() { return E; }
 
     @Override
     public void addEdge(int v, int w) {
@@ -54,8 +54,8 @@ public class GraphImpl implements Graph {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(v()).append(" vertices, ").append(e()).append(" edges").append(System.lineSeparator());
-        for (int v = 0; v < v(); v++) {
+        sb.append(V()).append(" vertices, ").append(E()).append(" edges").append(System.lineSeparator());
+        for (int v = 0; v < V(); v++) {
             sb.append(v).append(": ");
             for (int w : this.adj(v))
                 sb.append(w).append(" ");

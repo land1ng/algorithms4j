@@ -18,7 +18,7 @@ public class SearchDepthFirst implements Search {
      * @param s
      */
     public SearchDepthFirst(Graph G, int s) {
-        marked = new boolean[G.v()];
+        marked = new boolean[G.V()];
         dfs(G, s);
     }
 

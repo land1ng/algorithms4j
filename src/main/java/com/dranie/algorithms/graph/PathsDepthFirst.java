@@ -26,8 +26,8 @@ public class PathsDepthFirst implements Paths {
     private final int s;      // 起点
 
     public PathsDepthFirst(Graph G, int s) {
-        marked = new boolean[G.v()];
-        edgeTo = new int[G.v()];
+        marked = new boolean[G.V()];
+        edgeTo = new int[G.V()];
         this.s = s;
         dfs(G, s);
     }

@@ -15,8 +15,8 @@ public class PathsBreadthFirst implements Paths {
     private final int s;      // 起点
 
     public PathsBreadthFirst(Graph G, int s) {
-        marked = new boolean[G.v()];
-        edgeTo = new int[G.v()];
+        marked = new boolean[G.V()];
+        edgeTo = new int[G.V()];
         this.s = s;
         bfs(G, s);
     }

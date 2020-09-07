@@ -9,10 +9,10 @@ package com.dranie.algorithms.graph;
 public interface Graph {
 
     // 顶点数
-    int v();
+    int V();
 
     // 边数
-    int e();
+    int E();
 
     // 向图中添加一条边 v-w
     void addEdge(int v, int w);

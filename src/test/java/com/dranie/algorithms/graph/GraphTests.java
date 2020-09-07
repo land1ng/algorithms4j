@@ -1,7 +1,7 @@
 package com.dranie.algorithms.graph;
 
 import com.dranie.algorithms.Utils;
-import edu.princeton.cs.algs4.In;
+import com.dranie.algorithms.utils.In;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
