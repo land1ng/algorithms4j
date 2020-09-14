@@ -1,7 +1,9 @@
 package com.dranie.algorithms.graph;
 
-import edu.princeton.cs.algs4.Bag;
 import com.dranie.algorithms.utils.In;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 无向图的邻接表数组实现
@@ -14,14 +16,14 @@ public class GraphImpl implements Graph {
 
     private final int V;        // 顶点数目
     private int E;              // 边的数目
-    private final Bag<Integer>[] adj; // 邻接表
+    private final List<Integer>[] adj; // 邻接表
 
     public GraphImpl(int V) {
         this.V = V;
         this.E = 0;
-        adj = (Bag<Integer>[]) new Bag[V];
+        adj = (List<Integer>[]) new List[V];
         for (int v = 0; v < V; v++)
-            adj[v] = new Bag<>();
+            adj[v] = new LinkedList<>();
     }
 
     public GraphImpl(In in) {
