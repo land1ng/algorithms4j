@@ -43,6 +43,7 @@ public class DigraphImpl implements Digraph {
 
     @Override
     public void addEdge(int v, int w) {
+        // 和无向图的区别主要就在这儿，只会维护单项路径。
         adj[v].add(w);
         E++;
     }
