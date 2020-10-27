@@ -168,26 +168,25 @@ public abstract class BenchmarkUtil {
     }
 
 
-    private static Sample createRandom(final int n) {
+    public static Sample createRandom(final int n) {
         Sample bd = createSorted(n);
         Shuffle.shuffle(bd.data);
         return Sample.builder().data(bd.data).name("乱序").build();
     }
-    private static Sample createSorted(final int n) {
+    public static Sample createSorted(final int n) {
         int[] a = new int[n];
-        for (int i = 0; i < a.length; i++)
-            a[i] = i + 1;
+        Arrays.setAll(a, i -> i + 1);
         return Sample.builder().data(a).name("有序").build();
     }
-    private static Sample createInvert(final int n) {
+    public static Sample createInvert(final int n) {
         int[] a = new int[n];
-        for (int i = 0; i < a.length; i++)
-            a[i] = n - i;
+        Arrays.setAll(a, i -> n - i);
         return Sample.builder().data(a).name("逆序").build();
     }
-    private static Sample createEquals(final int n) {
+    public static Sample createEquals(final int n) {
         int[] a = new int[n];
-        Arrays.fill(a, new Random().nextInt(n));
+        Random rd = new Random();
+        Arrays.setAll(a, i -> rd.nextInt(n));
         return Sample.builder().data(a).name("等值").build();
     }
 }
