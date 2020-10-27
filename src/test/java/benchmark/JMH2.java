@@ -25,16 +25,26 @@ public class JMH2 {
     @SuppressWarnings("MismatchedReadAndWriteOfArray")
     private long[] la;
 
+    // 不同参数的结果往往差别很大
     // 测试不同参数下的不同结果
-    @Param({ "1", "10", "100", "1000", "10000", "100000", "1000000", "10000000", "100000000", "250000000" })
+//    @Param({ "1", "10", "100", "1000", "10000", "100000", "1000000", "10000000", "100000000", "250000000" })
+    @Param({ "10000000" })
     int size;
 
     @Setup
-    public void setup() { la = new long[size]; }
+    public void setup() {
+        la = new long[size];
+    }
+
+    // 计算的复杂度也会影响到基准测试的结果
+    public static long f(long x) {
+        long quadratic = 42 * x * x + 19 * x + 47;
+        return Long.divideUnsigned(quadratic, x + 1);
+    }
 
     @Benchmark
-    public void setAll() { Arrays.setAll(la, n -> n); }
+    public void setAll() { Arrays.setAll(la, JMH2::f); }
 
     @Benchmark
-    public void parallelSetAll() { Arrays.parallelSetAll(la, n -> n); }
+    public void parallelSetAll() { Arrays.parallelSetAll(la, JMH2::f); }
 }
