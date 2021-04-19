@@ -8,6 +8,7 @@ package leetcode;
  * @author dingdong
  * @since 2021/4/19
  */
+@SuppressWarnings("DuplicatedCode")
 public class MergeSortedList {
 
     public static void main(String[] args) {
