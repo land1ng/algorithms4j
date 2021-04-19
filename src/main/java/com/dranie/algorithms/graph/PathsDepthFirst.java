@@ -21,8 +21,8 @@ package com.dranie.algorithms.graph;
  */
 public class PathsDepthFirst implements Paths {
 
-    private boolean[] marked; // 这个顶点上调用过dfs()了吗？
-    private int[]     edgeTo; // 从起点到一个顶点的已知路径上的最后一个顶点
+    private final boolean[] marked; // 这个顶点上调用过dfs()了吗？
+    private final int[] edgeTo; // 从起点到一个顶点的已知路径上的最后一个顶点
     private final int s;      // 起点
 
     public PathsDepthFirst(Graph G, int s) {
@@ -35,8 +35,8 @@ public class PathsDepthFirst implements Paths {
     /**
      * 深度优先搜索
      *
-     * @param G
-     * @param v
+     * @param G ~
+     * @param v ~
      */
     private void dfs(Graph G, int v) {
         marked[v] = true;
@@ -51,8 +51,8 @@ public class PathsDepthFirst implements Paths {
     /**
      * 是否存在从 s 到 v 的路径
      *
-     * @param v
-     * @return
+     * @param v ~
+     * @return ~
      */
     @Override
     public boolean hasPathTo(int v) { return marked[v]; }
@@ -60,8 +60,8 @@ public class PathsDepthFirst implements Paths {
     /**
      * 列出所有 s 到 v 的路径
      *
-     * @param v
-     * @return
+     * @param v ~
+     * @return ~
      */
     @Override
     public Iterable<Integer> listPathsTo(int v) {
