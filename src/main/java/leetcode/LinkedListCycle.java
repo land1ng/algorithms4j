@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.struct.ListNode;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,20 +63,4 @@ public class LinkedListCycle {
         return false;
     }
 
-
-    public static class ListNode {
-
-        final int val;
-
-        ListNode next;
-
-        ListNode(int x) {
-            this(x, null);
-        }
-
-        ListNode(int x, ListNode next) {
-            this.val = x;
-            this.next = next;
-        }
-    }
 }

@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.struct.ListNode;
+
 /**
  * 给你一个链表数组，每个链表都已经按升序排列。
  * <p>
@@ -14,15 +16,8 @@ public class MergeSortedList {
     public static void main(String[] args) {
         ListNode head = mergeKLists(new ListNode[]{ toList(new int[]{ 1, 4, 5 }), toList(new int[]{ 1, 3, 4 }),
                                                     toList(new int[]{ 2, 6 }), });
-        while (head != null) {
-            System.out.print(head.val);
-            if (head.next == null) {
-                break;
-            }
-            head = head.next;
-            System.out.print(" -> ");
-        }
-        System.out.println();
+
+        System.out.println(head);
     }
 
     private static ListNode toList(int[] nums) {
@@ -172,20 +167,5 @@ public class MergeSortedList {
             }
         }
         return head;
-    }
-
-    public static class ListNode {
-
-        final int val;
-        ListNode next;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }

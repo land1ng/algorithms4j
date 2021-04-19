@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.struct.ListNode;
+
 /**
  * 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
  * <p>
@@ -15,15 +17,7 @@ public class SwapListPairs {
 
     public static void main(String[] args) {
         ListNode head = new SwapListPairs().swapPairs(toList(1, 2, 3, 4, 5));
-        while (true) {
-            System.out.print(head.val);
-            if (head.next == null) {
-                break;
-            }
-            System.out.print(" -> ");
-            head = head.next;
-        }
-        System.out.println();
+        System.out.println(head);
     }
 
     private static ListNode toList(int... nums) {
@@ -60,20 +54,5 @@ public class SwapListPairs {
             head = temp;
         }
         return swapHead;
-    }
-
-    public static class ListNode {
-
-        final int val;
-        ListNode next;
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }
