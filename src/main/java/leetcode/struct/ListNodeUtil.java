@@ -13,6 +13,9 @@ public class ListNodeUtil {
 
     @SuppressWarnings("DuplicatedCode")
     public static ListNode toList(int... nums) {
+        if (nums.length == 0) {
+            return null;
+        }
         if (nums.length == 1) {
             return new ListNode(nums[0]);
         }
