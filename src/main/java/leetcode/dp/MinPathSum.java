@@ -20,6 +20,7 @@ package leetcode.dp;
  * 状态转移方程：
  *
  * @author dingdong
+ * @see UniquePaths
  * @since 2021/4/20
  */
 public class MinPathSum {
