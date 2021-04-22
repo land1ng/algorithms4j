@@ -28,4 +28,33 @@ public class ListNodeUtil {
         return head;
     }
 
+    public static ListNode buildCycleList(int pos, int... nums) {
+        if (nums.length == 0) {
+            return null;
+        }
+        if (pos > nums.length - 1) {
+            throw new IllegalArgumentException();
+        }
+        ListNode junction = null;
+        int i = 0;
+        ListNode head = null;
+        ListNode tail = null;
+        do {
+            if (i == 0) {
+                head = new ListNode(nums[i]);
+                tail = head;
+            } else {
+                tail.next = new ListNode(nums[i]);
+                tail = tail.next;
+            }
+            if (i == pos) {
+                junction = tail;
+            }
+            i++;
+        } while (i < nums.length);
+        if (junction != null) {
+            tail.next = junction;
+        }
+        return head;
+    }
 }
