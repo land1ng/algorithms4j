@@ -1,6 +1,9 @@
 package leetcode.struct;
 
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.UtilityClass;
+
+import java.util.Objects;
 
 
 /**
@@ -56,5 +59,43 @@ public class ListNodeUtil {
             tail.next = junction;
         }
         return head;
+    }
+
+    public static ListNodeTuple2 buildIntersectionNodes(int[] a, int[] b, int[] c) {
+        ListNode headA = toList(a);
+        ListNode headB = toList(b);
+        ListNode tailA = Objects.requireNonNull(findTail(headA));
+        ListNode tailB = Objects.requireNonNull(findTail(headB));
+        ListNode headC = toList(c);
+        tailA.next = headC;
+        tailB.next = headC;
+        return new ListNodeTuple2(headA, headB);
+    }
+
+    public static ListNode findTail(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode node = head;
+        while (node.next != null) {
+            node = node.next;
+        }
+        return node;
+    }
+
+    @RequiredArgsConstructor
+    public static class ListNodeTuple2 {
+
+        public final ListNode headA;
+
+        public final ListNode headB;
+    }
+
+    public static void main(String[] args) {
+        ListNodeTuple2 tuple = buildIntersectionNodes(new int[]{ 1, 2, 3, 4 },
+                new int[]{ 5, 6, 7, 8 },
+                new int[]{ 11, 22, 33 });
+        System.out.println(tuple.headA);
+        System.out.println(tuple.headB);
     }
 }
