@@ -11,6 +11,10 @@ import com.dranie.algorithms.sort.utils.BenchmarkUtil;
 @FunctionalInterface
 public interface Sort {
 
+    default String name() {
+        return this.getClass().getSimpleName();
+    }
+
     /**
      * 排序数组，数组中每个元素都不为空！
      *
