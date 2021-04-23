@@ -27,11 +27,12 @@ public class QuickNonRecurse extends Quick {
         return "单轴快速排序非递归版本";
     }
 
-    private static class Block {
+    private static class Interval {
+
         final int lo;
         final int hi;
 
-        Block(int lo, int hi) {
+        Interval(int lo, int hi) {
             this.lo = lo;
             this.hi = hi;
         }
@@ -39,19 +40,19 @@ public class QuickNonRecurse extends Quick {
 
     @Override
     protected void sort(int[] a, int lo, int hi) {
-        Deque<Block> stack = new LinkedList<>();
-        stack.push(new Block(lo, hi));
-        Block block;
-        while (!stack.isEmpty() && (block = stack.pop()) != null) {
-            int l = block.lo;
-            int h = block.hi;
+        Deque<Interval> stack = new LinkedList<>();
+        stack.push(new Interval(lo, hi));
+        Interval interval;
+        while (!stack.isEmpty() && (interval = stack.pop()) != null) {
+            int l = interval.lo;
+            int h = interval.hi;
             if (h <= l + INSERTION_BOUND) {
                 Insertion.sort(a, l, h);
                 continue;
             }
             int m = doPartition(a, l, h);
-            if (m - 1 > l) stack.push(new Block(l, m - 1));
-            if (m + 1 < h) stack.push(new Block(m + 1, h));
+            if (m - 1 > l) stack.push(new Interval(l, m - 1));
+            if (m + 1 < h) stack.push(new Interval(m + 1, h));
         }
     }
 
