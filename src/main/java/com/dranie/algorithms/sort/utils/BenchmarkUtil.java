@@ -111,10 +111,10 @@ public abstract class BenchmarkUtil {
 
 
     private static long elapsedTime(final Sort algo, final int[] a) {
-        long init = System.currentTimeMillis();
+        long init = System.nanoTime();
         algo.sort(a);
-        long done = System.currentTimeMillis();
-        return done - init;
+        long done = System.nanoTime();
+        return (done - init) / 1000;
     }
 
 
