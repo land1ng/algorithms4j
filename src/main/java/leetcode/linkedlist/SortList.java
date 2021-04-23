@@ -24,31 +24,39 @@ import leetcode.struct.ListNodeUtil;
 public class SortList {
 
     public static void main(String[] args) {
+        System.out.println(sortList(ListNodeUtil.toList(11, 4, 5, 2, 111)));
         System.out.println(sortList(ListNodeUtil.toList(11, 4, 5, 2, 111, 222)));
     }
 
+    @SuppressWarnings("UnnecessaryLocalVariable")
     public static ListNode sortList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode l = head;
-        ListNode r = head.next;
-        l.next = null;
-        while (r != null) {
-            ListNode rNext = r.next;
-            r.next = null;
-            l = merge(l, r);
-            r = rNext;
-        }
-        return l;
+        ListNode lHead = head;
+        ListNode rHead = cutoff(head);
+        ListNode lSortedHead = sortList(lHead);
+        ListNode rSortedHead = sortList(rHead);
+        return merge(lSortedHead, rSortedHead);
     }
 
-    private static ListNode merge(ListNode l, ListNode r) {
+    private static ListNode cutoff(ListNode head) {
+        ListNode slow = new ListNode(0, head), fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode rHead = slow.next;
+        slow.next = null;
+        return rHead;
+    }
+
+    private static ListNode merge(ListNode lSortedHead, ListNode rSortedHead) {
         ListNode dummy = new ListNode(Integer.MIN_VALUE);
         ListNode tail = dummy;
-        ListNode lp = l;
-        ListNode rp = r;
-        while (lp != null || rp != null) {
+        ListNode lp = lSortedHead;
+        ListNode rp = rSortedHead;
+        while (true) {
             if (lp != null && rp != null) {
                 if (lp.val > rp.val) {
                     tail.next = rp;
@@ -65,6 +73,8 @@ public class SortList {
             } else if (rp != null) {
                 tail.next = rp;
                 rp = null;
+            } else {
+                break;
             }
         }
         return dummy.next;
