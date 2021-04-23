@@ -13,6 +13,11 @@ import com.dranie.algorithms.utils.Optimizable;
 public class Merge implements CompareBasedSort {
 
     @Override
+    public String name() {
+        return "归并排序";
+    }
+
+    @Override
     public void sort(int[] a) {
         sort(a, new int[a.length], 0, a.length - 1);
     }

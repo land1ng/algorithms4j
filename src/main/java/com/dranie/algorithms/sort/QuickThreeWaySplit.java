@@ -16,6 +16,11 @@ public class QuickThreeWaySplit implements CompareBasedSort {
 
     private static final int INSERTION_BOUND = 16;
 
+    @Override
+    public String name() {
+        return "单轴快速三向切分";
+    }
+
     /**
      * 排序数组，数组中每个元素都不为空！
      *

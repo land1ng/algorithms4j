@@ -8,6 +8,11 @@ package com.dranie.algorithms.sort;
  */
 public class Insertion implements CompareBasedSort {
 
+    @Override
+    public String name() {
+        return "插入排序";
+    }
+
     /**
      * 排序数组，数组中每个元素都不为空！
      *

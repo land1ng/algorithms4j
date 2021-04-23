@@ -22,9 +22,15 @@ public class QuickNonRecurse extends Quick {
 
     private static final int INSERTION_BOUND = 16;
 
+    @Override
+    public String name() {
+        return "单轴快速排序非递归版本";
+    }
+
     private static class Block {
         final int lo;
         final int hi;
+
         Block(int lo, int hi) {
             this.lo = lo;
             this.hi = hi;

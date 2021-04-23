@@ -13,6 +13,11 @@ public class MergeInPlace implements CompareBasedSort {
 
     private static final int INSERTION_BOUND = 15;
 
+    @Override
+    public String name() {
+        return "原地归并";
+    }
+
     /**
      * 排序数组，数组中每个元素都不为空！
      *

@@ -18,6 +18,11 @@ import com.dranie.algorithms.sort.utils.BenchmarkUtil;
  */
 public class ShellSort implements CompareBasedSort {
 
+    @Override
+    public String name() {
+        return "希尔排序";
+    }
+
     /**
      * 排序数组，数组中每个元素都不为空！
      *

@@ -1,11 +1,15 @@
 package com.dranie.algorithms.sort.utils;
 
-import com.dranie.algorithms.sort.Shuffle;
-import com.dranie.algorithms.sort.Sort;
+import com.dranie.algorithms.sort.*;
+import com.dranie.algorithms.utils.Tuple2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * 性能测试工具类
@@ -19,6 +23,45 @@ public abstract class BenchmarkUtil {
 
     private static String name(final Sort algo) {
         return algo.name();
+    }
+
+    /**
+     * 多个排序算法对比测试
+     *
+     * @param algos
+     */
+    public static void comparing(Sort... algos) {
+        // 正确性校验
+        List<Sort> candidates = Arrays.stream(algos).map(algo -> Tuple2.of(algo, checkSilent(algo))).filter(tuple -> {
+            if (!tuple._2()) {
+                log.warn("算法 [{}] 未通过正确性测试，跳过对比测试！", tuple._1().name());
+            }
+            return tuple._2();
+        }).map(Tuple2::_1).collect(Collectors.toList());
+        // 时间复杂度比较测试
+        Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
+            log.info("[比较测试] 数据量：{}", scale);
+            compareTime(candidates, createRandom(scale));
+            compareTime(candidates, createEquals(scale));
+            compareTime(candidates, createInvert(scale));
+            compareTime(candidates, createSorted(scale));
+        });
+    }
+
+    private static void compareTime(List<Sort> candidates, Sample sample) {
+        List<Tuple2<Sort, Long>> result4random = candidates.stream().map(algo -> {
+            long time4random = elapsedTime(algo, sample.copy().data);
+            return Tuple2.of(algo, time4random);
+        }).sorted(Comparator.comparing(Tuple2::_2)).collect(Collectors.toList());
+        StringBuilder result = new StringBuilder();
+        AtomicInteger index = new AtomicInteger();
+        result4random.forEach(single -> {
+            result.append(single._1().name()).append("(").append(single._2()).append("ms)");
+            if (index.incrementAndGet() != candidates.size()) {
+                result.append(" -> ");
+            }
+        });
+        log.info(" ===> [{}] {}", sample.name, result.toString());
     }
 
     /**
@@ -64,8 +107,7 @@ public abstract class BenchmarkUtil {
      */
     public static void benchmark(final int[] a, final Sort... algos) {
         Arrays.asList(algos).forEach(algo -> {
-            if (!checkSilent(algo))
-                return;
+            if (!checkSilent(algo)) return;
             int[] copy = new int[a.length];
             System.arraycopy(a, 0, copy, 0, a.length);
             log.info("[{}] 给定数组测试...消耗时间：{}", name(algo), elapsedTime(algo, copy));
@@ -78,8 +120,7 @@ public abstract class BenchmarkUtil {
      * @param algo
      */
     public static void fuckingJDK(final Sort algo) {
-        if (!checkSilent(algo))
-            return;
+        if (!checkSilent(algo)) return;
         Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
             log.info("[{}] Fucking JDK! 数据量: {}", name(algo), scale);
             int score = 0;
@@ -114,7 +155,7 @@ public abstract class BenchmarkUtil {
         long init = System.nanoTime();
         algo.sort(a);
         long done = System.nanoTime();
-        return (done - init) / 1000;
+        return (done - init) / 1000000;
     }
 
 
@@ -146,7 +187,6 @@ public abstract class BenchmarkUtil {
             return false;
         }
     }
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static boolean checkSilent(final Sort algo) {
         int n = 20;
         boolean c1 = checkSilent0(algo, createRandom(n));
@@ -183,10 +223,25 @@ public abstract class BenchmarkUtil {
         Arrays.setAll(a, i -> n - i);
         return Sample.builder().data(a).name("逆序").build();
     }
+
     public static Sample createEquals(final int n) {
         int[] a = new int[n];
         Random rd = new Random();
         Arrays.setAll(a, i -> rd.nextInt(n));
         return Sample.builder().data(a).name("等值").build();
+    }
+
+    public static void main(String[] args) {
+        comparing(new Quick(), new Merge(), new HeapSort(), new Sort() {
+            @Override
+            public String name() {
+                return "JDK排序";
+            }
+
+            @Override
+            public void sort(int[] a) {
+                Arrays.sort(a);
+            }
+        });
     }
 }

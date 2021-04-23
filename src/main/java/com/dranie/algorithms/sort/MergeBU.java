@@ -8,6 +8,11 @@ package com.dranie.algorithms.sort;
  */
 public class MergeBU extends Merge {
 
+    @Override
+    public String name() {
+        return "归并排序-自底向上";
+    }
+
     /**
      * 排序数组，数组中每个元素都不为空！
      *
