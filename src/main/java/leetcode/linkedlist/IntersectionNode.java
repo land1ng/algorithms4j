@@ -1,5 +1,6 @@
 package leetcode.linkedlist;
 
+import com.dranie.algorithms.utils.mark.Graceful;
 import leetcode.struct.ListNode;
 import leetcode.struct.ListNodeUtil;
 
@@ -27,6 +28,7 @@ import leetcode.struct.ListNodeUtil;
  * @author dingdong
  * @since 2021/4/22
  */
+@Graceful
 public class IntersectionNode {
 
     public static void main(String[] args) {
