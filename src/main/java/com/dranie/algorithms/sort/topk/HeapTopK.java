@@ -52,15 +52,15 @@ abstract class HeapTopK implements TopK {
 
     private void insert(int data) {
         if (size < heap.length - 1)
-            withTail(data);
+            insertAsTail(data);
         else
-            withHead(data);
+            insertAsHead(data);
     }
 
     private int top() { return heap[1]; }
 
     // 替换堆顶
-    private void withHead(int data) {
+    private void insertAsHead(int data) {
         if (pqType == HeapUtil.PQType.MIN_PQ) {
             if (data < top()) return;
         } else {
@@ -70,7 +70,7 @@ abstract class HeapTopK implements TopK {
         HeapUtil.sink(heap, 1, size, pqType);
     }
     // 追加堆尾
-    private void withTail(int data) {
+    private void insertAsTail(int data) {
         heap[++size] = data;
         HeapUtil.swim(heap, size, 1, pqType);
     }
