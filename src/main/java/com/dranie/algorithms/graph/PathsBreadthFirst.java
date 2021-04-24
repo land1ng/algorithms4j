@@ -1,7 +1,6 @@
 package com.dranie.algorithms.graph;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 广度优先搜索：寻找单点最短路径
@@ -12,7 +11,7 @@ import java.util.Queue;
 public class PathsBreadthFirst implements Paths {
 
     private final boolean[] marked; // 到达该顶点的最短路径已知吗？
-    private final int[] edgeTo; // 从起点到一个顶点的已知路径上的最后一个顶点
+    private final int[]     edgeTo; // 从起点到一个顶点的已知路径上的最后一个顶点
     private final int s;      // 起点
 
     public PathsBreadthFirst(Graph G, int s) {
@@ -24,13 +23,13 @@ public class PathsBreadthFirst implements Paths {
 
     /**
      * 广度优先搜索
-     * <p>
+     *
      * 寻找过程：要找到从s到v的最短路径，从s开始，在所有由一条边就可以到达的顶点中寻找v，如果找不到
      * 我们就继续在与s距离两条边的所有顶点中查找v，如此一直进行。
-     * <p>
+     *
      * 比较深度优先搜索：深度优先搜索像是一个人在走迷宫，广度优先搜索则好像是一组人在朝各个方向走这座迷宫。
      *
-     * @param G ~
+     * @param G
      * @param s 搜索起点
      */
     private void bfs(Graph G, int s) {
@@ -52,8 +51,8 @@ public class PathsBreadthFirst implements Paths {
     /**
      * 是否存在从 s 到 v 的路径
      *
-     * @param v ~
-     * @return ~
+     * @param v
+     * @return
      */
     @Override
     public boolean hasPathTo(int v) { return marked[v]; }
@@ -70,8 +69,8 @@ public class PathsBreadthFirst implements Paths {
      * 0 to 4: 0-2-4
      * 0 to 5: 0-5
      *
-     * @param v ~
-     * @return ~
+     * @param v
+     * @return
      */
     @Override
     public Iterable<Integer> listPathsTo(int v) {

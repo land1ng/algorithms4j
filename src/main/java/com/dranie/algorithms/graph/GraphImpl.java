@@ -15,7 +15,7 @@ import java.util.List;
 public class GraphImpl implements Graph {
 
     private final int V;        // 顶点数目
-    private int E;              // 边的数目
+    private       int E;        // 边的数目
     private final List<Integer>[] adj; // 邻接表
 
     public GraphImpl(int V) {
