@@ -23,4 +23,15 @@ public interface MinPQ<T extends Comparable<T>> extends PQ<T> {
      */
     T delMin();
 
+    static <E extends Comparable<E>> MinPQ<E> of() {
+        return new MinPQImpl<>();
+    }
+
+    static <E extends Comparable<E>> MinPQ<E> of(int size) {
+        return new MinPQImpl<>(size);
+    }
+
+    static <E extends Comparable<E>> MinPQ<E> of(E[] data) {
+        return new MinPQImpl<>(data);
+    }
 }

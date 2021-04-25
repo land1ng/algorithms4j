@@ -23,4 +23,15 @@ public interface MaxPQ<T extends Comparable<T>> extends PQ<T> {
      */
     T delMax();
 
+    static <E extends Comparable<E>> MaxPQ<E> of() {
+        return new MaxPQImpl<>();
+    }
+
+    static <E extends Comparable<E>> MaxPQ<E> of(int size) {
+        return new MaxPQImpl<>(size);
+    }
+
+    static <E extends Comparable<E>> MaxPQ<E> of(E[] data) {
+        return new MaxPQImpl<>(data);
+    }
 }
