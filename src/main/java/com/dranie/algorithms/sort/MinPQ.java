@@ -7,20 +7,20 @@ package com.dranie.algorithms.sort;
  * @since 2020.05.30
  */
 @SuppressWarnings("UnusedReturnValue")
-public interface MaxPQ<T extends Comparable<T>> extends PQ<T> {
+public interface MinPQ<T extends Comparable<T>> extends PQ<T> {
 
     /**
      * 返回最大的元素
      *
      * @return
      */
-    T max();
+    T min();
 
     /**
-     * 删除并返回最大的元素
+     * 删除并返回最小的元素
      *
-     * @return max()
+     * @return min()
      */
-    T delMax();
+    T delMin();
 
 }
