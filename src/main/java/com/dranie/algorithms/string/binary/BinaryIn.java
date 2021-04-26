@@ -46,6 +46,8 @@ public interface BinaryIn extends Closeable {
      */
     boolean readBoolean();
 
+    String readString();
+
     /**
      * 关闭输入流，确保不再读取。
      */

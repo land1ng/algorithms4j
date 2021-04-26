@@ -18,49 +18,49 @@ public class RunLengthCompressCodec implements CompressCodec {
     /**
      * 压缩
      *
-     * @param bTn  输入流
-     * @param bOut 输出流
+     * @param bin  输入流
+     * @param bout 输出流
      */
     @Override
-    public void compress(BinaryIn bTn, BinaryOut bOut) {
+    public void compress(BinaryIn bin, BinaryOut bout) {
         char cnt = 0;
         boolean b, old = false;
-        while (!bTn.isEmpty()) {
-            b = bTn.readBoolean();
+        while (!bin.isEmpty()) {
+            b = bin.readBoolean();
             if (b != old) {
-                bOut.write(cnt);
+                bout.write(cnt);
                 cnt = 0;
                 old = !old;
             } else {
                 if (cnt == 255) {
-                    bOut.write(cnt);
+                    bout.write(cnt);
                     cnt = 0; // TODO 这个0是做什么的？
-                    bOut.write(cnt);
+                    bout.write(cnt);
                 }
             }
             cnt++;
         }
-        bOut.write(cnt);
-        bOut.close();
+        bout.write(cnt);
+        bout.close();
     }
 
     /**
      * 解压缩
      *
-     * @param bTn  输入流
-     * @param bOut 输出流
+     * @param bin  输入流
+     * @param bout 输出流
      */
     @Override
-    public void uncompress(BinaryIn bTn, BinaryOut bOut) {
+    public void uncompress(BinaryIn bin, BinaryOut bout) {
         boolean b = false;
-        while (!bTn.isEmpty()) {
-            char cnt = bTn.readChar();
+        while (!bin.isEmpty()) {
+            char cnt = bin.readChar();
             for (int i = 0; i < cnt; i++) {
-                bOut.write(b);
+                bout.write(b);
             }
             b = !b;
         }
-        bOut.close();
+        bout.close();
     }
 
     public static void main(String[] args) {

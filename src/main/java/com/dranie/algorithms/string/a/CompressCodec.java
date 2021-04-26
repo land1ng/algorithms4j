@@ -19,10 +19,10 @@ public interface CompressCodec {
     /**
      * 压缩
      *
-     * @param bTn  输入流
-     * @param bOut 输出流
+     * @param bin  输入流
+     * @param bout 输出流
      */
-    void compress(BinaryIn bTn, BinaryOut bOut);
+    void compress(BinaryIn bin, BinaryOut bout);
 
     default void compress(File in, File out) {
         try (BinaryIn bin = Binarys.newBinaryIn(in); BinaryOut bout = Binarys.newBinaryOut(out)) {
@@ -39,10 +39,10 @@ public interface CompressCodec {
     /**
      * 解压缩
      *
-     * @param bTn  输入流
-     * @param bOut 输出流
+     * @param bin  输入流
+     * @param bout 输出流
      */
-    void uncompress(BinaryIn bTn, BinaryOut bOut);
+    void uncompress(BinaryIn bin, BinaryOut bout);
 
     default void uncompress(File in, File out) {
         try (BinaryIn bin = Binarys.newBinaryIn(in); BinaryOut bout = Binarys.newBinaryOut(out)) {

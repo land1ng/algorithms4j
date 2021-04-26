@@ -181,6 +181,19 @@ class BinaryInImpl implements BinaryIn {
         return bit;
     }
 
+    @Override
+    public String readString() {
+
+        if (isEmpty()) throw new NoSuchElementException("Reading from empty input stream");
+
+        StringBuilder sb = new StringBuilder();
+        while (!isEmpty()) {
+            char c = readChar();
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
     private void fillBuffer() {
         try {
             buffer = in.read();
