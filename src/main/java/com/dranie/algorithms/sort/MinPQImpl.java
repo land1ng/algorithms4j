@@ -20,7 +20,7 @@ public class MinPQImpl<T extends Comparable<T>> extends AbstractPQ<T> implements
     }
 
     /**
-     * 返回最大的元素
+     * 返回最小的元素
      *
      * @return
      */
@@ -30,7 +30,7 @@ public class MinPQImpl<T extends Comparable<T>> extends AbstractPQ<T> implements
     }
 
     /**
-     * 删除并返回最大的元素
+     * 删除并返回最小的元素
      *
      * @return
      */
@@ -59,7 +59,7 @@ public class MinPQImpl<T extends Comparable<T>> extends AbstractPQ<T> implements
             int i = 2 * k;
             // 选择两个子节点中较大的那一个
             if (i < size() && less(i + 1, i)) i++;
-            // 让父节点与子节点中较大的那个交换
+            // 让父节点与子节点中较小的那个交换
             if (less(i, k)) {
                 exch(k, i);
                 k = i;
