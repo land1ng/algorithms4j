@@ -8,6 +8,8 @@ package com.dranie.algorithms.sort;
  */
 public class Insertion implements CompareBasedSort {
 
+    private static final Insertion INSTANCE = new Insertion();
+
     @Override
     public String name() {
         return "插入排序";
@@ -31,11 +33,10 @@ public class Insertion implements CompareBasedSort {
      * @param hi
      */
     public static void sort(int[] a, int lo, int hi) {
-        Insertion instance = new Insertion();
         for (int i = lo; i <= hi; i++) {
             for (int j = i; j > lo; j--) {
-                if (instance.less(a, j, j - 1)) {
-                    instance.exch(a, j, j - 1);
+                if (INSTANCE.less(a, j, j - 1)) {
+                    INSTANCE.exch(a, j, j - 1);
                 } else {
                     break;
                 }
