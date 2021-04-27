@@ -13,6 +13,11 @@ public class MergeOptimized extends Merge {
     protected static final int INSERTION_BOUND = 15;
 
     @Override
+    public String name() {
+        return "归并排序-优化版";
+    }
+
+    @Override
     protected void sort(int[] a, int[] aux, int lo, int hi) {
         // 递归的终止条件：数组长度为1的时候自然就是有序的
 //        if (lo >= hi)
@@ -26,8 +31,7 @@ public class MergeOptimized extends Merge {
         sort(a, aux, lo, mi);       // 左半边排序
         sort(a, aux, mi + 1, hi);   // 右半边排序
         // 优化点2：比较左子数组上界和右子数组下界，提前结束排序。
-        if (less(a, mi, mi + 1))
-            return;
+        if (less(a, mi, mi + 1)) return;
         merge(a, aux, lo, mi, hi);  // 合并子数组
     }
 

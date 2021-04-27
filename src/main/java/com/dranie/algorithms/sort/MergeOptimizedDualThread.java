@@ -15,6 +15,11 @@ public class MergeOptimizedDualThread extends MergeOptimized {
     private static final boolean canBeParallel = Runtime.getRuntime().availableProcessors() > 1;
 
     @Override
+    public String name() {
+        return "双路归并";
+    }
+
+    @Override
     public void sort(int[] a) {
         if (canBeParallel) {
             int[] aux = new int[a.length];

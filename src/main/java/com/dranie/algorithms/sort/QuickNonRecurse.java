@@ -24,7 +24,7 @@ public class QuickNonRecurse extends Quick {
 
     @Override
     public String name() {
-        return "单轴快速排序非递归版本";
+        return "单轴快排-非递归";
     }
 
     private static class Interval {

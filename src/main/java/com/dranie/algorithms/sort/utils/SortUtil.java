@@ -71,20 +71,20 @@ public abstract class SortUtil {
 
     // 元素交换
     public static void exch(int[] a, int i, int j) {
-        if (i == j)
-            return;
+        if (i == j) return;
         a[i] ^= a[j];
         a[j] ^= a[i];
         a[i] ^= a[j];
     }
+
     public static void exch(double[] a, int i, int j) {
         double tmp = a[i];
         a[i] = a[j];
         a[j] = tmp;
     }
-    @SuppressWarnings({"rawtypes"})
-    public static void exch(Comparable[] a, int i, int j) {
-        Comparable tmp = a[i];
+
+    public static void exch(Object[] a, int i, int j) {
+        Object tmp = a[i];
         a[i] = a[j];
         a[j] = tmp;
     }

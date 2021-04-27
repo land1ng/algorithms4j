@@ -3,6 +3,8 @@ package com.dranie.algorithms.sort;
 import java.util.Arrays;
 
 /**
+ * 抽象优先队列，实现一些模板方法。
+ *
  * @author dingdong
  * @since 2021/4/25
  */
@@ -57,6 +59,8 @@ public abstract class AbstractPQ<T extends Comparable<T>> implements PQ<T> {
      * 上浮
      *
      * @param k
+     * @see MinPQImpl#swim(int)
+     * @see MaxPQImpl#swim(int)
      */
     protected abstract void swim(int k);
 
@@ -64,16 +68,18 @@ public abstract class AbstractPQ<T extends Comparable<T>> implements PQ<T> {
      * 下沉
      *
      * @param k
+     * @see MinPQImpl#sink(int)
+     * @see MaxPQImpl#sink(int)
      */
     protected abstract void sink(int k);
 
     /**
      * 删除并返回堆顶的元素
      *
-     * @return
+     * @return 堆顶的元素
      */
     protected T delTop() {
-        T top = heap[1];        // 1.从根节点得到最大元素
+        T top = top();          // 1.从根节点得到最大元素
         exch(1, size--);     // 2.将其和最后一个节点交换
         heap[size + 1] = null;  // 3.便于垃圾回收
         sink(1);             // 4.恢复堆的有序性

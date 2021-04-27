@@ -1,5 +1,7 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.utils.SortUtil;
+
 import java.util.Random;
 
 /**
@@ -14,13 +16,8 @@ public abstract class Shuffle {
         for (int i = 0; i < origin.length; i++) {
             if (i > 0) {
                 int index = rnd.nextInt(i);
-                swap(origin, i, index);
+                SortUtil.exch(origin, i, index);
             }
         }
-    }
-    private static void swap(int[] a, int i, int j) {
-        int tmp = a[i];
-        a[i] = a[j];
-        a[j] = tmp;
     }
 }

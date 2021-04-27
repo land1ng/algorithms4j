@@ -10,7 +10,7 @@ public class Quick implements CompareBasedSort {
 
     @Override
     public String name() {
-        return "单轴快速排序";
+        return "单轴快排";
     }
 
     /**

@@ -10,7 +10,7 @@ public class QuickOptimized extends Quick {
 
     @Override
     public String name() {
-        return "单轴快速排序优化版";
+        return "单轴快排-优化版";
     }
 
     @Override

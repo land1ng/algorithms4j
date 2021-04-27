@@ -18,7 +18,7 @@ public class QuickThreeWaySplit implements CompareBasedSort {
 
     @Override
     public String name() {
-        return "单轴快速三向切分";
+        return "单轴快排-三向切分";
     }
 
     /**
