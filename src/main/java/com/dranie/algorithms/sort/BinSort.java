@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2021/4/23
  */
 @Optimizable
-public class BinSort implements Sort {
+public class BinSort implements IntSort {
 
     @Override
     public String name() {

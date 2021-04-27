@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public abstract class BenchmarkUtil {
 
 
-    private static String name(final Sort algo) {
+    private static String name(final IntSort algo) {
         return algo.name();
     }
 
@@ -30,9 +30,9 @@ public abstract class BenchmarkUtil {
      *
      * @param algos
      */
-    public static void comparing(Sort... algos) {
+    public static void comparing(IntSort... algos) {
         // 正确性校验
-        List<Sort> candidates = Arrays.stream(algos).map(algo -> Tuple2.of(algo, checkSilent(algo))).filter(tuple -> {
+        List<IntSort> candidates = Arrays.stream(algos).map(algo -> Tuple2.of(algo, checkSilent(algo))).filter(tuple -> {
             if (!tuple._2()) {
                 log.warn("算法 [{}] 未通过正确性测试，跳过对比测试！", tuple._1().name());
             }
@@ -48,8 +48,8 @@ public abstract class BenchmarkUtil {
         });
     }
 
-    private static void compareTime(List<Sort> candidates, Sample sample) {
-        List<Tuple2<Sort, Long>> result4random = candidates.stream().map(algo -> {
+    private static void compareTime(List<IntSort> candidates, Sample sample) {
+        List<Tuple2<IntSort, Long>> result4random = candidates.stream().map(algo -> {
             long time4random = elapsedTime(algo, sample.copy().data);
             return Tuple2.of(algo, time4random);
         }).sorted(Comparator.comparing(Tuple2::_2)).collect(Collectors.toList());
@@ -69,7 +69,7 @@ public abstract class BenchmarkUtil {
      *
      * @param algo
      */
-    public static void benchmark(final Sort algo) {
+    public static void benchmark(final IntSort algo) {
         if (!checkSilent(algo)) return;
         Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> benchmark0(algo, scale));
     }
@@ -80,7 +80,7 @@ public abstract class BenchmarkUtil {
      * @param scale 数据量
      * @param algos 算法列表
      */
-    public static void benchmark(final int scale, final Sort... algos) {
+    public static void benchmark(final int scale, final IntSort... algos) {
         Arrays.asList(algos).forEach(algo -> {
             if (!checkSilent(algo))
                 return;
@@ -88,14 +88,14 @@ public abstract class BenchmarkUtil {
         });
     }
 
-    private static void benchmark0(final Sort algo, final int scale) {
+    private static void benchmark0(final IntSort algo, final int scale) {
         log.info("[{}] 性能测试，数据量：{}", name(algo), scale);
         benchmark1(algo, createRandom(scale));
         benchmark1(algo, createSorted(scale));
         benchmark1(algo, createInvert(scale));
         benchmark1(algo, createEquals(scale));
     }
-    private static void benchmark1(final Sort algo, final Sample sample) {
+    private static void benchmark1(final IntSort algo, final Sample sample) {
         log.info("[{}] 性能测试，{}...消耗时间：{}", name(algo), sample.name, elapsedTime(algo, sample.data));
     }
 
@@ -105,7 +105,7 @@ public abstract class BenchmarkUtil {
      * @param a
      * @param algos
      */
-    public static void benchmark(final int[] a, final Sort... algos) {
+    public static void benchmark(final int[] a, final IntSort... algos) {
         Arrays.asList(algos).forEach(algo -> {
             if (!checkSilent(algo)) return;
             int[] copy = new int[a.length];
@@ -119,7 +119,7 @@ public abstract class BenchmarkUtil {
      *
      * @param algo
      */
-    public static void fuckingJDK(final Sort algo) {
+    public static void fuckingJDK(final IntSort algo) {
         if (!checkSilent(algo)) return;
         Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
             log.info("[{}] Fucking JDK! 数据量: {}", name(algo), scale);
@@ -140,7 +140,7 @@ public abstract class BenchmarkUtil {
             log.info("[{}] Fucking JDK! {}:{}, {}", name(algo), score, 4 - score, ret);
         });
     }
-    private static int fuckingJDK0(final Sort algo, final Sample sample) {
+    private static int fuckingJDK0(final IntSort algo, final Sample sample) {
         int[] data = sample.data;
         int[] copy = new int[data.length];
         System.arraycopy(data, 0, copy, 0, data.length);
@@ -151,7 +151,7 @@ public abstract class BenchmarkUtil {
     }
 
 
-    private static long elapsedTime(final Sort algo, final int[] a) {
+    private static long elapsedTime(final IntSort algo, final int[] a) {
         long init = System.nanoTime();
         algo.sort(a);
         long done = System.nanoTime();
@@ -164,8 +164,8 @@ public abstract class BenchmarkUtil {
      *
      * @param algo
      */
-    public static boolean check(final Sort algo) { return check(algo, 20); }
-    public static boolean check(final Sort algo, final int n) {
+    public static boolean check(final IntSort algo) { return check(algo, 20); }
+    public static boolean check(final IntSort algo, final int n) {
         boolean c1 = check0(algo, createRandom(n));
         boolean c2 = check0(algo, createSorted(n));
         boolean c3 = check0(algo, createInvert(n));
@@ -176,7 +176,7 @@ public abstract class BenchmarkUtil {
             logCheckFailed(algo);
         return false;
     }
-    private static boolean check0(final Sort algo, final Sample sample) {
+    private static boolean check0(final IntSort algo, final Sample sample) {
         log.info("[{}] 正确性测试，{}数组...排序之前：{}", name(algo), sample.name, sample.data);
         algo.sort(sample.data);
         if (SortUtil.isSorted(sample.data)) {
@@ -187,7 +187,7 @@ public abstract class BenchmarkUtil {
             return false;
         }
     }
-    private static boolean checkSilent(final Sort algo) {
+    private static boolean checkSilent(final IntSort algo) {
         int n = 20;
         boolean c1 = checkSilent0(algo, createRandom(n));
         boolean c2 = checkSilent0(algo, createSorted(n));
@@ -199,11 +199,11 @@ public abstract class BenchmarkUtil {
             logCheckFailed(algo);
         return false;
     }
-    private static boolean checkSilent0(final Sort algo, final Sample sample) {
+    private static boolean checkSilent0(final IntSort algo, final Sample sample) {
         algo.sort(sample.data);
         return SortUtil.isSorted(sample.data);
     }
-    private static void logCheckFailed(final Sort algo) {
+    private static void logCheckFailed(final IntSort algo) {
         log.error("[{}] 算法错误...", name(algo));
     }
 
@@ -232,7 +232,7 @@ public abstract class BenchmarkUtil {
     }
 
     public static void main(String[] args) {
-        comparing(new Quick(), new Merge(), new HeapSort(), new Sort() {
+        comparing(new Quick(), new Merge(), new HeapSort(), new IntSort() {
             @Override
             public String name() {
                 return "JDK排序";

@@ -9,7 +9,7 @@ import com.dranie.algorithms.sort.utils.BenchmarkUtil;
  * @since 2020.06.29
  */
 @FunctionalInterface
-public interface Sort {
+public interface IntSort {
 
     default String name() {
         return this.getClass().getSimpleName();

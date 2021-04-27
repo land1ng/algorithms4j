@@ -1,7 +1,5 @@
 package com.dranie.algorithms.sort;
 
-import com.dranie.algorithms.sort.utils.BenchmarkUtil;
-
 /**
  * 比较型排序接口
  *
@@ -9,7 +7,7 @@ import com.dranie.algorithms.sort.utils.BenchmarkUtil;
  * @since 2020.05.30
  */
 @FunctionalInterface
-public interface CompareBasedSort extends Sort {
+public interface CompareBasedSort extends IntSort {
     default boolean less(int[] a, int i, int j) {
         return a[i] < a[j];
     }
