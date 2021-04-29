@@ -1,5 +1,7 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.utils.SortUtil;
+
 /**
  * 插入排序的最差情况：反序数组，最好情况：有序数组。
  *
@@ -7,8 +9,6 @@ package com.dranie.algorithms.sort;
  * @since 2020.05.30
  */
 public class Insertion implements CompareBasedSort, IntSort {
-
-    private static final Insertion INSTANCE = new Insertion();
 
     @Override
     public String name() {
@@ -34,18 +34,18 @@ public class Insertion implements CompareBasedSort, IntSort {
      */
     @Override
     public void sort(int[] a, int lo, int hi) {
+        sortRange(a, lo, hi);
+    }
+
+    public static void sortRange(int[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++) {
             for (int j = i; j > lo; j--) {
-                if (INSTANCE.less(a, j, j - 1)) {
-                    INSTANCE.exch(a, j, j - 1);
+                if (SortUtil.less(a, j, j - 1)) {
+                    SortUtil.exch(a, j, j - 1);
                 } else {
                     break;
                 }
             }
         }
-    }
-
-    public static void sortRange(int[] a, int lo, int hi) {
-        INSTANCE.sort(a, lo, hi);
     }
 }
