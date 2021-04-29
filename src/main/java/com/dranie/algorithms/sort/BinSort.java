@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2021/4/23
  */
 @Optimizable
-public class BinSort implements IntSort {
+public class BinSort implements BaseIntSort {
 
     @Override
     public String name() {
@@ -50,7 +50,7 @@ public class BinSort implements IntSort {
         int index = 0;
         for (List<Integer> bucket : buckets) {
             int[] a1 = bucket.stream().mapToInt(t -> t).toArray();
-            Insertion.sort(a1, 0, a1.length - 1);
+            Insertion.sortRange(a1, 0, a1.length - 1);
             System.arraycopy(a1, 0, a, index, a1.length);
             index += a1.length;
         }

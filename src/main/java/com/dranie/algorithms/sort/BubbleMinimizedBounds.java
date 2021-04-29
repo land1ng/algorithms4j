@@ -15,16 +15,18 @@ import lombok.extern.slf4j.Slf4j;
 public class BubbleMinimizedBounds extends Bubble {
 
     /**
-     * 排序数组，数组中每个元素都不为空！
+     * 排序 [lo, hi] 范围内的数据
      *
-     * @param a
+     * @param a  待排序数组
+     * @param lo 左边界
+     * @param hi 右边界
      */
     @Override
-    public void sort(int[] a) {
+    public void sort(int[] a, int lo, int hi) {
         int count = 0;
-        for (int i = a.length - 1; i > 0; i--) {
+        for (int i = hi; i > lo; i--) {
             int up = 0;
-            for (int j = 0; j < i; j++) {
+            for (int j = lo; j < i; j++) {
                 count++;
                 if (less(a, j + 1, j)) {
                     exch(a, j + 1, j);

@@ -20,7 +20,7 @@ public class MergeOptimizedParallel extends MergeOptimized {
             return;
         // 优化点1：小数组使用插入排序
         if (lo >= hi - INSERTION_BOUND) {
-            Insertion.sort(a, lo, hi);
+            Insertion.sortRange(a, lo, hi);
             return;
         }
         int mi = lo + (hi - lo) / 2;

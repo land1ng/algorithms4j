@@ -9,7 +9,7 @@ package com.dranie.algorithms.sort;
  * @author dranfree
  * @since 2020.05.30
  */
-public class MergeInPlace implements CompareBasedSort {
+public class MergeInPlace implements CompareBasedSort, IntSort {
 
     private static final int INSERTION_BOUND = 15;
 
@@ -18,23 +18,14 @@ public class MergeInPlace implements CompareBasedSort {
         return "原地归并";
     }
 
-    /**
-     * 排序数组，数组中每个元素都不为空！
-     *
-     * @param a
-     */
     @Override
-    public void sort(int[] a) {
-        sort(a, 0, a.length - 1);
-    }
-
-    private void sort(int[] a, int lo, int hi) {
+    public void sort(int[] a, int lo, int hi) {
         // 递归的终止条件：数组长度为1的时候自然就是有序的
 //        if (lo >= hi)
 //            return;
         // 优化点1：小数组使用插入排序
         if (lo >= hi - INSERTION_BOUND) {
-            Insertion.sort(a, lo, hi);
+            Insertion.sortRange(a, lo, hi);
             return;
         }
         int mi = lo + (hi - lo) / 2;

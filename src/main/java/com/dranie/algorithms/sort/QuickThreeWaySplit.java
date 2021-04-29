@@ -12,7 +12,7 @@ import com.dranie.algorithms.sort.utils.BenchmarkUtil;
  * @author dranfree
  * @since 2020.05.30
  */
-public class QuickThreeWaySplit implements CompareBasedSort {
+public class QuickThreeWaySplit implements CompareBasedSort, IntSort {
 
     private static final int INSERTION_BOUND = 16;
 
@@ -21,21 +21,12 @@ public class QuickThreeWaySplit implements CompareBasedSort {
         return "单轴快排-三向切分";
     }
 
-    /**
-     * 排序数组，数组中每个元素都不为空！
-     *
-     * @param a
-     */
     @Override
-    public void sort(int[] a) {
-        sort(a, 0, a.length - 1);
-    }
-
-    private void sort(int[] a, int lo, int hi) {
+    public void sort(int[] a, int lo, int hi) {
 //        if (hi <= lo)
 //            return;
         if (hi <= lo + INSERTION_BOUND) {
-            Insertion.sort(a, lo, hi);
+            Insertion.sortRange(a, lo, hi);
             return;
         }
         int lt = lo, i = lo + 1, gt = hi;

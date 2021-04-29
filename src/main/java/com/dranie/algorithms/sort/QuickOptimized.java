@@ -14,16 +14,16 @@ public class QuickOptimized extends Quick {
     }
 
     @Override
-    protected void sort(int[] a, int lo, int hi) {
+    protected void innerSort(int[] a, int lo, int hi) {
         if (hi > lo) {
             // 优化点：小数组使用插入排序
             if (hi <= lo + INSERTION_BOUND) {
-                Insertion.sort(a, lo, hi);
+                Insertion.sortRange(a, lo, hi);
                 return;
             }
             int pivot = doPartition(a, lo, hi);
-            sort(a, lo, pivot - 1);
-            sort(a, pivot + 1, hi);
+            innerSort(a, lo, pivot - 1);
+            innerSort(a, pivot + 1, hi);
         }
     }
 }

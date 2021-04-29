@@ -39,7 +39,7 @@ public class QuickNonRecurse extends Quick {
     }
 
     @Override
-    protected void sort(int[] a, int lo, int hi) {
+    protected void innerSort(int[] a, int lo, int hi) {
         Deque<Interval> stack = new LinkedList<>();
         stack.push(new Interval(lo, hi));
         Interval interval;
@@ -47,7 +47,7 @@ public class QuickNonRecurse extends Quick {
             int l = interval.lo;
             int h = interval.hi;
             if (h <= l + INSERTION_BOUND) {
-                Insertion.sort(a, l, h);
+                Insertion.sortRange(a, l, h);
                 continue;
             }
             int m = doPartition(a, l, h);

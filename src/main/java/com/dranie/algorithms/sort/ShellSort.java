@@ -16,7 +16,7 @@ import com.dranie.algorithms.sort.utils.BenchmarkUtil;
  * @author dranfree
  * @since 2020.05.31
  */
-public class ShellSort implements CompareBasedSort {
+public class ShellSort implements CompareBasedSort, BaseIntSort {
 
     @Override
     public String name() {

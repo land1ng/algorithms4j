@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public abstract class BenchmarkUtil {
 
 
-    private static String name(final IntSort algo) {
+    private static String name(final BaseIntSort algo) {
         return algo.name();
     }
 
@@ -30,9 +30,9 @@ public abstract class BenchmarkUtil {
      *
      * @param algos
      */
-    public static void comparing(IntSort... algos) {
+    public static void comparing(BaseIntSort... algos) {
         // 正确性校验
-        List<IntSort> candidates = Arrays.stream(algos).map(algo -> Tuple2.of(algo, checkSilent(algo))).filter(tuple -> {
+        List<BaseIntSort> candidates = Arrays.stream(algos).map(algo -> Tuple2.of(algo, checkSilent(algo))).filter(tuple -> {
             if (!tuple._2()) {
                 log.warn("算法 [{}] 未通过正确性测试，跳过对比测试！", tuple._1().name());
             }
@@ -48,8 +48,8 @@ public abstract class BenchmarkUtil {
         });
     }
 
-    private static void compareTime(List<IntSort> candidates, Sample sample) {
-        List<Tuple2<IntSort, Long>> result4random = candidates.stream().map(algo -> {
+    private static void compareTime(List<BaseIntSort> candidates, Sample sample) {
+        List<Tuple2<BaseIntSort, Long>> result4random = candidates.stream().map(algo -> {
             long time4random = elapsedTime(algo, sample.copy().data);
             return Tuple2.of(algo, time4random);
         }).sorted(Comparator.comparing(Tuple2::_2)).collect(Collectors.toList());
@@ -69,7 +69,7 @@ public abstract class BenchmarkUtil {
      *
      * @param algo
      */
-    public static void benchmark(final IntSort algo) {
+    public static void benchmark(final BaseIntSort algo) {
         if (!checkSilent(algo)) return;
         Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> benchmark0(algo, scale));
     }
@@ -80,7 +80,7 @@ public abstract class BenchmarkUtil {
      * @param scale 数据量
      * @param algos 算法列表
      */
-    public static void benchmark(final int scale, final IntSort... algos) {
+    public static void benchmark(final int scale, final BaseIntSort... algos) {
         Arrays.asList(algos).forEach(algo -> {
             if (!checkSilent(algo))
                 return;
@@ -88,14 +88,14 @@ public abstract class BenchmarkUtil {
         });
     }
 
-    private static void benchmark0(final IntSort algo, final int scale) {
+    private static void benchmark0(final BaseIntSort algo, final int scale) {
         log.info("[{}] 性能测试，数据量：{}", name(algo), scale);
         benchmark1(algo, createRandom(scale));
         benchmark1(algo, createSorted(scale));
         benchmark1(algo, createInvert(scale));
         benchmark1(algo, createEquals(scale));
     }
-    private static void benchmark1(final IntSort algo, final Sample sample) {
+    private static void benchmark1(final BaseIntSort algo, final Sample sample) {
         log.info("[{}] 性能测试，{}...消耗时间：{}", name(algo), sample.name, elapsedTime(algo, sample.data));
     }
 
@@ -105,7 +105,7 @@ public abstract class BenchmarkUtil {
      * @param a
      * @param algos
      */
-    public static void benchmark(final int[] a, final IntSort... algos) {
+    public static void benchmark(final int[] a, final BaseIntSort... algos) {
         Arrays.asList(algos).forEach(algo -> {
             if (!checkSilent(algo)) return;
             int[] copy = new int[a.length];
@@ -119,7 +119,7 @@ public abstract class BenchmarkUtil {
      *
      * @param algo
      */
-    public static void fuckingJDK(final IntSort algo) {
+    public static void fuckingJDK(final BaseIntSort algo) {
         if (!checkSilent(algo)) return;
         Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
             log.info("[{}] Fucking JDK! 数据量: {}", name(algo), scale);
@@ -140,7 +140,7 @@ public abstract class BenchmarkUtil {
             log.info("[{}] Fucking JDK! {}:{}, {}", name(algo), score, 4 - score, ret);
         });
     }
-    private static int fuckingJDK0(final IntSort algo, final Sample sample) {
+    private static int fuckingJDK0(final BaseIntSort algo, final Sample sample) {
         int[] data = sample.data;
         int[] copy = new int[data.length];
         System.arraycopy(data, 0, copy, 0, data.length);
@@ -151,7 +151,7 @@ public abstract class BenchmarkUtil {
     }
 
 
-    private static long elapsedTime(final IntSort algo, final int[] a) {
+    private static long elapsedTime(final BaseIntSort algo, final int[] a) {
         long init = System.nanoTime();
         algo.sort(a);
         long done = System.nanoTime();
@@ -164,55 +164,84 @@ public abstract class BenchmarkUtil {
      *
      * @param algo
      */
-    public static boolean check(final IntSort algo) { return check(algo, 20); }
-    public static boolean check(final IntSort algo, final int n) {
+    public static boolean check(final BaseIntSort algo) { return check(algo, 20); }
+    public static boolean check(final BaseIntSort algo, final int n) {
         boolean c1 = check0(algo, createRandom(n));
         boolean c2 = check0(algo, createSorted(n));
         boolean c3 = check0(algo, createInvert(n));
         boolean c4 = check0(algo, createEquals(n));
-        if (c1 && c2 && c3 && c4)
+        if (c1 && c2 && c3 && c4) {
+            log.info("[正确性测试] [{}] 算法正确！", name(algo));
             return true;
-        else
+        } else {
             logCheckFailed(algo);
+        }
         return false;
     }
-    private static boolean check0(final IntSort algo, final Sample sample) {
-        log.info("[{}] 正确性测试，{}数组...排序之前：{}", name(algo), sample.name, sample.data);
+    private static boolean check0(final BaseIntSort algo, final Sample sample) {
+        log.debug("[{}] 正确性测试，{}数组...排序之前：{}", name(algo), sample.name, sample.data);
         algo.sort(sample.data);
         if (SortUtil.isSorted(sample.data)) {
-            log.info("[{}] 正确性测试，{}数组...排序成功：{}", name(algo), sample.name, sample.data);
+            log.debug("[{}] 正确性测试，{}数组...排序成功：{}", name(algo), sample.name, sample.data);
             return true;
         } else {
             log.error("[{}] 正确性测试，{}数组...排序错误：{}", name(algo), sample.name, sample.data);
             return false;
         }
     }
-    private static boolean checkSilent(final IntSort algo) {
+    private static boolean checkSilent(final BaseIntSort algo) {
         int n = 20;
         boolean c1 = checkSilent0(algo, createRandom(n));
         boolean c2 = checkSilent0(algo, createSorted(n));
         boolean c3 = checkSilent0(algo, createInvert(n));
         boolean c4 = checkSilent0(algo, createEquals(n));
-        if (c1 && c2 && c3 && c4)
+        if (c1 && c2 && c3 && c4) {
             return true;
-        else
+        } else {
             logCheckFailed(algo);
+        }
         return false;
     }
-    private static boolean checkSilent0(final IntSort algo, final Sample sample) {
+
+    private static boolean checkSilent0(final BaseIntSort algo, final Sample sample) {
         algo.sort(sample.data);
         return SortUtil.isSorted(sample.data);
     }
-    private static void logCheckFailed(final IntSort algo) {
-        log.error("[{}] 算法错误...", name(algo));
+
+    private static void logCheckFailed(final BaseIntSort algo) {
+        log.error("[正确性测试] [{}] 算法错误...", name(algo));
     }
 
+    public static void checkInterval(IntSort algo) {
+        boolean c1 = checkInterval0(algo, createRandom(20));
+        boolean c2 = checkInterval0(algo, createSorted(20));
+        boolean c3 = checkInterval0(algo, createInvert(20));
+        boolean c4 = checkInterval0(algo, createEquals(20));
+        if (c1 && c2 && c3 && c4) {
+            log.info("[区间测试] [{}] 算法正确！", name(algo));
+        } else {
+            log.error("[区间测试] [{}] 算法错误...", name(algo));
+        }
+    }
+
+    private static boolean checkInterval0(final IntSort algo, final Sample sample) {
+        log.debug("[{}] 区间测试，{}数组...排序之前：{}", name(algo), sample.name, sample.data);
+        algo.sort(sample.data, 0, sample.data.length - 1);
+        if (SortUtil.isSorted(sample.data, 0, sample.data.length - 1)) {
+            log.debug("[{}] 区间测试，{}数组...排序成功：{}", name(algo), sample.name, sample.data);
+            return true;
+        } else {
+            log.error("[{}] 区间测试，{}数组...排序错误：{}", name(algo), sample.name, sample.data);
+            return false;
+        }
+    }
 
     public static Sample createRandom(final int n) {
         Sample bd = createSorted(n);
         Shuffle.shuffle(bd.data);
         return Sample.builder().data(bd.data).name("乱序").build();
     }
+
     public static Sample createSorted(final int n) {
         int[] a = new int[n];
         Arrays.setAll(a, i -> i + 1);
@@ -238,9 +267,16 @@ public abstract class BenchmarkUtil {
                 return "JDK排序";
             }
 
+            /**
+             * 排序 [lo, hi] 范围内的数据
+             *
+             * @param a  待排序数组
+             * @param lo 左边界
+             * @param hi 右边界
+             */
             @Override
-            public void sort(int[] a) {
-                Arrays.sort(a);
+            public void sort(int[] a, int lo, int hi) {
+                Arrays.sort(a, lo, hi);
             }
         });
     }

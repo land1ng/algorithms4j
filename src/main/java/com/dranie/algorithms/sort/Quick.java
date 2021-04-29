@@ -6,29 +6,24 @@ package com.dranie.algorithms.sort;
  * @author dranfree
  * @since 2020.05.30
  */
-public class Quick implements CompareBasedSort {
+public class Quick implements CompareBasedSort, IntSort {
 
     @Override
     public String name() {
         return "单轴快排";
     }
 
-    /**
-     * 排序数组，数组中每个元素都不为空！
-     *
-     * @param a
-     */
     @Override
-    public void sort(int[] a) {
-        Shuffle.shuffle(a);
-        sort(a, 0, a.length - 1);
+    public void sort(int[] a, int lo, int hi) {
+        Shuffle.shuffle(a, lo, hi);
+        innerSort(a, lo, hi);
     }
 
-    protected void sort(int[] a, int lo, int hi) {
+    protected void innerSort(int[] a, int lo, int hi) {
         if (hi > lo) {
             int pivot = doPartition(a, lo, hi);
-            sort(a, lo, pivot - 1);
-            sort(a, pivot + 1, hi);
+            innerSort(a, lo, pivot - 1);
+            innerSort(a, pivot + 1, hi);
         }
     }
 

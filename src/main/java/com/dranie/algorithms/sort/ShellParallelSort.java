@@ -78,7 +78,6 @@ public class ShellParallelSort extends ShellSort implements Closeable {
                     exch(a, j, j - h);
             }
             l.countDown();
-            log.info("i = {} and h = {}, finished.", i, h);
         }
     }
 

@@ -6,7 +6,7 @@ package com.dranie.algorithms.sort;
  * @author dranfree
  * @since 2020.05.30
  */
-public class HeapSort implements CompareBasedSort {
+public class HeapSort implements CompareBasedSort, BaseIntSort {
 
     @Override
     public String name() {
@@ -43,13 +43,10 @@ public class HeapSort implements CompareBasedSort {
         while (2 * k <= h) {
             int i = 2 * k;
             // 选择两个子节点中较大的那一个
-            if (i < h && less(a, i - 1, i))
-                i++;
+            if (i < h && less(a, i - 1, i)) i++;
             // 让父节点与子节点中较大的那个交换
-            if (less(a, k - 1, i - 1))
-                exch(a, k - 1, i - 1);
-            else
-                break;
+            if (less(a, k - 1, i - 1)) exch(a, k - 1, i - 1);
+            else break;
             k = i;
         }
     }

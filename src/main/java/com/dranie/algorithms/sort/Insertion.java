@@ -6,7 +6,7 @@ package com.dranie.algorithms.sort;
  * @author dranfree
  * @since 2020.05.30
  */
-public class Insertion implements CompareBasedSort {
+public class Insertion implements CompareBasedSort, IntSort {
 
     private static final Insertion INSTANCE = new Insertion();
 
@@ -26,13 +26,14 @@ public class Insertion implements CompareBasedSort {
     }
 
     /**
-     * 排序指定的子数组部分
+     * 排序 [lo, hi] 范围内的数据
      *
-     * @param a
-     * @param lo
-     * @param hi
+     * @param a  待排序数组
+     * @param lo 左边界
+     * @param hi 右边界
      */
-    public static void sort(int[] a, int lo, int hi) {
+    @Override
+    public void sort(int[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++) {
             for (int j = i; j > lo; j--) {
                 if (INSTANCE.less(a, j, j - 1)) {
@@ -42,5 +43,9 @@ public class Insertion implements CompareBasedSort {
                 }
             }
         }
+    }
+
+    public static void sortRange(int[] a, int lo, int hi) {
+        INSTANCE.sort(a, lo, hi);
     }
 }

@@ -10,23 +10,29 @@ import com.dranie.algorithms.utils.Optimizable;
  * @since 2020.05.30
  */
 @Optimizable
-public class Merge implements CompareBasedSort {
+public class Merge implements CompareBasedSort, IntSort {
 
     @Override
     public String name() {
         return "归并排序";
     }
 
+    /**
+     * 排序 [lo, hi] 范围内的数据
+     *
+     * @param a  待排序数组
+     * @param lo 左边界
+     * @param hi 右边界
+     */
     @Override
-    public void sort(int[] a) {
-        sort(a, new int[a.length], 0, a.length - 1);
+    public void sort(int[] a, int lo, int hi) {
+        sort(a, new int[hi - lo + 1], lo, hi);
     }
 
     @Optimizable
     protected void sort(int[] a, int[] aux, int lo, int hi) {
         // 递归的终止条件：数组长度为1的时候自然就是有序的
-        if (lo >= hi)
-            return;
+        if (lo >= hi) return;
         int mi = lo + (hi - lo) / 2;
         sort(a, aux, lo, mi);       // 左半边排序
         sort(a, aux, mi + 1, hi);   // 右半边排序

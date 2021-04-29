@@ -16,6 +16,8 @@ public class MergeBU extends Merge {
     /**
      * 排序数组，数组中每个元素都不为空！
      *
+     * TODO 范围排序重构
+     *
      * @param a
      */
     @Override

@@ -1,12 +1,14 @@
 package com.dranie.algorithms.sort;
 
+import java.util.Arrays;
+
 /**
  * 选择排序：选择右边最小的元素
  *
  * @author dranfree
  * @since 2020.05.30
  */
-public class Selection implements CompareBasedSort {
+public class Selection implements CompareBasedSort, IntSort {
 
     @Override
     public String name() {
@@ -14,20 +16,26 @@ public class Selection implements CompareBasedSort {
     }
 
     /**
-     * 排序数组，数组中每个元素都不为空！
+     * 排序 [lo, hi] 范围内的数据
      *
-     * @param a
+     * @param a  待排序数组
+     * @param lo 左边界
+     * @param hi 右边界
      */
     @Override
-    public void sort(int[] a) {
-        for (int i = 0; i < a.length; i++) {
+    public void sort(int[] a, int lo, int hi) {
+        for (int i = lo; i <= hi; i++) {
             int k = i; // 记录右边最小的元素的索引
-            for (int j = i + 1; j < a.length; j++) {
-                if (less(a, j, i))
-                    k = j;
+            for (int j = i + 1; j <= hi; j++) {
+                if (less(a, j, k)) k = j;
             }
-            if (k != i)
-                exch(a, i, k);
+            if (k != i) exch(a, i, k);
         }
+    }
+
+    public static void main(String[] args) {
+        int[] a = { 1, 3, 2, 5, 111, -1, 2 };
+        new Selection().sort(a);
+        System.out.println(Arrays.toString(a));
     }
 }
