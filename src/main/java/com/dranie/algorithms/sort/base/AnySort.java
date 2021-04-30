@@ -7,7 +7,7 @@ package com.dranie.algorithms.sort.base;
  * @since 2021/4/27
  */
 @FunctionalInterface
-public interface AnySort<T extends Comparable<T>> {
+public interface AnySort<T extends Comparable<T>> extends BaseAnySort<T> {
 
     /**
      * 对指定数组进行排序
