@@ -1,4 +1,4 @@
-package com.dranie.algorithms.sort;
+package com.dranie.algorithms.sort.base;
 
 import com.dranie.algorithms.sort.utils.BenchmarkUtil;
 

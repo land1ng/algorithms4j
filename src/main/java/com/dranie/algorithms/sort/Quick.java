@@ -1,5 +1,7 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.base.IntSort;
+
 /**
  * 单轴快排
  *

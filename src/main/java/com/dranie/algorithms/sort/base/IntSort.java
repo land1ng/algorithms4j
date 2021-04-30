@@ -1,4 +1,4 @@
-package com.dranie.algorithms.sort;
+package com.dranie.algorithms.sort.base;
 
 /**
  * 排序接口

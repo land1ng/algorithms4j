@@ -1,6 +1,8 @@
 package com.dranie.algorithms.sort.utils;
 
 import com.dranie.algorithms.sort.*;
+import com.dranie.algorithms.sort.base.BaseIntSort;
+import com.dranie.algorithms.sort.base.IntSort;
 import com.dranie.algorithms.utils.Tuple2;
 import lombok.extern.slf4j.Slf4j;
 

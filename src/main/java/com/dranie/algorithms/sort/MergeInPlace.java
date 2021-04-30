@@ -1,5 +1,7 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.base.IntSort;
+
 /**
  * 原地归并：不需要辅助数组
  *

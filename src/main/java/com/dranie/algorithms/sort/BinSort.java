@@ -1,5 +1,6 @@
 package com.dranie.algorithms.sort;
 
+import com.dranie.algorithms.sort.base.BaseIntSort;
 import com.dranie.algorithms.utils.Optimizable;
 
 import java.util.ArrayList;
