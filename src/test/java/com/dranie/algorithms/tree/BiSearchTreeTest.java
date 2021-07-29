@@ -7,7 +7,7 @@ package com.dranie.algorithms.tree;
 public class BiSearchTreeTest extends TreeTest {
 
     @Override
-    protected Tree<String, String> getEmptyTree() {
+    protected <K extends Comparable<K>, V> Tree<K, V> getEmptyTree() {
         return new BiSearchTree<>();
     }
 }
