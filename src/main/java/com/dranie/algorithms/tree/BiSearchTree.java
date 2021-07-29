@@ -17,7 +17,7 @@ import java.util.Objects;
  * @author ran.ding
  * @since 2021/7/29
  */
-public class BinaryTree<K extends Comparable<K>, V> implements Tree<K, V> {
+public class BiSearchTree<K extends Comparable<K>, V> implements Tree<K, V> {
 
     private Node<K, V> root;
 
