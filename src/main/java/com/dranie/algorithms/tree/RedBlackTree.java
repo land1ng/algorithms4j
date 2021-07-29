@@ -14,7 +14,7 @@ import java.util.Iterator;
  *     <li>红链接均为左链接</li>
  *     <li>没有任何一个结点同时和两条红链接相连</li>
  *     <li>该树是完美黑色平衡的，即任意空链接到根结点额路径上的黑链接数量相同。</li>
- *     <li>将红黑树画平时，一棵红黑树就是一棵2-3树。<image src="https://ding-resource.oss-cn-hangzhou.aliyuncs.com/flat_red_black_tree.png"/></li>
+ *     <li>将红黑树画平时，一棵红黑树就是一棵2-3树。<p><image src="https://ding-resource.oss-cn-hangzhou.aliyuncs.com/flat_red_black_tree.png"/></li>
  * </ol>
  * 使用标准二叉树的思想来实现2-3树的好处是，我们可以直接使用标准二叉树的 {@code get()} 方法而无需任何修改。
  * <p>
