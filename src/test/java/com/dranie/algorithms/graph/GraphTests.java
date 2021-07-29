@@ -3,7 +3,7 @@ package com.dranie.algorithms.graph;
 import com.dranie.algorithms.Utils;
 import com.dranie.algorithms.utils.In;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 图相关测试
