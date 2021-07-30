@@ -1,12 +1,10 @@
-package com.dranie.algorithms.tree;
-
-import lombok.Getter;
+package com.dranie.algorithms.bst;
 
 import java.util.Iterator;
 
 /**
  * 红黑树的性质：
- * <ol>
+ * <ul>
  *     <li>基本思想是：用标准二叉树(完全由2-结点构成)和一些额外信息(替换3-结点)来表示2-3树</li>
  *     <li>红黑树是2-3树的一种实现方式</li>
  *     <li>根节点总是黑色</li>
@@ -15,8 +13,18 @@ import java.util.Iterator;
  *     <li>没有任何一个结点同时和两条红链接相连</li>
  *     <li>该树是完美黑色平衡的，即任意空链接到根结点额路径上的黑链接数量相同。</li>
  *     <li>将红黑树画平时，一棵红黑树就是一棵2-3树。<p><image src="https://ding-resource.oss-cn-hangzhou.aliyuncs.com/flat_red_black_tree.png"/></li>
- * </ol>
+ *     <li>使用随机键构建的一棵典型红黑树：<p><image src="https://ding-resource.oss-cn-hangzhou.aliyuncs.com/random_red_black_tree.jpg" /></li>
+ *     <li>一棵大小为{@code N}的红黑树的高度不会超过{@code 2lgN}</li>
+ * </ul>
  * 使用标准二叉树的思想来实现2-3树的好处是，我们可以直接使用标准二叉树的 {@code get()} 方法而无需任何修改。
+ * <p>
+ * 一些疑问：
+ * <ul>
+ *     <li>为什么只允许红色左链接？<p>
+ *         可以减少可能出现的各种情况，因此用来实现的代码会更少。</li>
+ *     <li>为什么不在Node中使用K数组来保存2-结点/3-结点/4-结点？<p>
+ *         B-Tree中是这样做的，但是2-3树中结点较少，用数组带来的开销过大。</li>
+ * </ul>
  * <p>
  *
  * @author ran.ding
@@ -141,7 +149,6 @@ public class RedBlackTree<K extends Comparable<K>, V>
         return null;
     }
 
-    @Getter
     static class Node<K extends Comparable<K>, V>
             extends AbstractBST.Node<K, V, Node<K, V>>
             implements Tree.Node<K, V> {

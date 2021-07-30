@@ -1,4 +1,4 @@
-package com.dranie.algorithms.tree;
+package com.dranie.algorithms.bst;
 
 import lombok.Getter;
 
