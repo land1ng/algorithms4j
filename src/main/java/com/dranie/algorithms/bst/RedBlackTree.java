@@ -1,5 +1,7 @@
 package com.dranie.algorithms.bst;
 
+import com.dranie.algorithms.utils.Tuple2;
+
 import java.util.Iterator;
 
 /**
@@ -42,25 +44,30 @@ public class RedBlackTree<K extends Comparable<K>, V>
 
     @Override
     public V put(K key, V value) {
-        this.root = put(this.root, key, value);
+        Tuple2<Node<K, V>, V> tuple = put(this.root, key, value);
+        this.root = tuple._1();
         this.root.toBlack();
-        // fixme 需要返回旧值
-        return null;
+        return tuple._2();
     }
 
-    private Node<K, V> put(Node<K, V> h, K key, V value) {
+    private Tuple2<Node<K, V>, V> put(Node<K, V> h, K key, V value) {
         if (h == null) {
             Node<K, V> node = new Node<>(key, value);
             node.toRed();
-            return node;
+            return Tuple2.of(node, null);
         }
+        V oldValue;
         int cmp = h.getKey().compareTo(key);
         if (cmp > 0) {
-            h.left = put(h.left, key, value);
+            Tuple2<Node<K, V>, V> tuple = put(h.left, key, value);
+            h.left = tuple._1();
+            oldValue = tuple._2();
         } else if (cmp < 0) {
-            h.right = put(h.right, key, value);
+            Tuple2<Node<K, V>, V> tuple = put(h.right, key, value);
+            h.right = tuple._1();
+            oldValue = tuple._2();
         } else {
-            h.setValue(value);
+            oldValue = h.setValue(value);
         }
         // colors
         // 1.左链接是黑色，右链接是红色。
@@ -75,7 +82,7 @@ public class RedBlackTree<K extends Comparable<K>, V>
         if (isRed(h.left) && isRed(h.right)) {
             flipColors(h);
         }
-        return h;
+        return Tuple2.of(h, oldValue);
     }
 
     private boolean isRed(Node<K, V> node) {
