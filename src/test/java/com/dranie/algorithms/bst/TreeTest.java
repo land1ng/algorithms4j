@@ -16,6 +16,7 @@ abstract class TreeTest {
 
     @Test
     void test() {
+        // init data
         Tree<Integer, Integer> tree = getEmptyTree();
         assertTrue(tree.isEmpty());
         int minKey = Integer.MAX_VALUE;
@@ -28,7 +29,10 @@ abstract class TreeTest {
             minKey = Math.min(minKey, key);
             maxKey = Math.max(maxKey, key);
         }
+        // assert
         assertNull(tree.get(100));
+        assertTrue(tree.containsKey(nc.keySet().stream().findAny().orElse(0)));
+        assertTrue(tree.containsValue(nc.values().stream().findAny().orElse(0)));
         assertEquals(nc.get(1), tree.get(1));
         assertEquals(tree.size(), nc.size());
         assertEquals(tree.minKey(), minKey);

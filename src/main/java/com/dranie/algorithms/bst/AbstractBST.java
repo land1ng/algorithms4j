@@ -2,6 +2,8 @@ package com.dranie.algorithms.bst;
 
 import lombok.Getter;
 
+import java.util.Objects;
+
 /**
  * @author ran.ding
  * @since 2021/7/29
@@ -41,8 +43,24 @@ public abstract class AbstractBST<K extends Comparable<K>, V, S extends Abstract
 
     @Override
     public boolean containsValue(Object value) {
-        // TODO 暂不实现
-        throw new UnsupportedOperationException();
+        return getValueNode(getRoot(), value) != null;
+    }
+
+    private S getValueNode(S root, Object value) {
+        if (root == null) {
+            return null;
+        }
+        if (Objects.equals(root.getValue(), value)) {
+            return root;
+        }
+        S node;
+        if ((node = getValueNode(root.left, value)) != null) {
+            return node;
+        }
+        if ((node = getValueNode(root.right, value)) != null) {
+            return node;
+        }
+        return null;
     }
 
     @Override
