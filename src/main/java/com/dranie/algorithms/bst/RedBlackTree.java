@@ -123,6 +123,11 @@ public class RedBlackTree<K extends Comparable<K>, V>
         return x;
     }
 
+    @Override
+    public void clear() {
+        this.root = null;
+    }
+
     /**
      * 删除最小键
      * <p>
@@ -139,7 +144,7 @@ public class RedBlackTree<K extends Comparable<K>, V>
     }
 
     @Override
-    public void deleteKey(K key) {
+    public void delete(K key) {
         // TODO
     }
 

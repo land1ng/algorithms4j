@@ -41,7 +41,7 @@ abstract class TreeTest {
         tree.deleteMax();
         assertTrue(tree.minKey() >= minKey);
         assertTrue(tree.maxKey() <= maxKey);
-        tree.deleteKey(20);
+        tree.delete(20);
         assertNull(tree.get(20));
     }
 

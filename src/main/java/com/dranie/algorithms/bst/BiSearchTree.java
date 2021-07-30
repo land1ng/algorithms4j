@@ -84,6 +84,11 @@ public class BiSearchTree<K extends Comparable<K>, V>
     }
 
     @Override
+    public void clear() {
+        this.root = null;
+    }
+
+    @Override
     public void deleteMin() {
         this.root = deleteMin(this.root);
     }
@@ -121,7 +126,7 @@ public class BiSearchTree<K extends Comparable<K>, V>
      * @param key
      */
     @Override
-    public void deleteKey(K key) {
+    public void delete(K key) {
         this.root = deleteKey(this.root, key);
     }
 
