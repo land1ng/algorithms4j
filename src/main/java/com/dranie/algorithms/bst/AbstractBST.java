@@ -5,6 +5,8 @@ import lombok.Getter;
 import java.util.Objects;
 
 /**
+ * 封装标准BST的一些操作，对于标准BST和红黑树，它们的查询过程都是一致的。
+ *
  * @author ran.ding
  * @since 2021/7/29
  */

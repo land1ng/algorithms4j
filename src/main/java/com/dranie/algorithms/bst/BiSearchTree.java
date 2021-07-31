@@ -8,10 +8,10 @@ import java.util.Objects;
 
 /**
  * 二叉查找树
- * <li>
- *     <ul>key is not null</ul>
- *     <ul>value is nullable</ul>
- * </li>
+ * <ul>
+ *     <li>key is not null</li>
+ *     <li>value is nullable</li>
+ * </ul>
  *
  * @author ran.ding
  * @since 2021/7/29
