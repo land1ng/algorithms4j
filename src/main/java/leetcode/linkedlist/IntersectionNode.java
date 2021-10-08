@@ -1,5 +1,6 @@
 package leetcode.linkedlist;
 
+import com.dranie.algorithms.utils.Tuple2;
 import com.dranie.algorithms.utils.mark.Graceful;
 import leetcode.struct.ListNode;
 import leetcode.struct.ListNodeUtil;
@@ -32,10 +33,10 @@ import leetcode.struct.ListNodeUtil;
 public class IntersectionNode {
 
     public static void main(String[] args) {
-        ListNodeUtil.ListNodeTuple2 tuple = ListNodeUtil.buildIntersectionNodes(new int[]{ 1, 2, 3, 4 },
-                new int[]{ 5, 6, 7, 8 },
-                new int[]{ 11, 22, 33 });
-        System.out.println(getIntersectionNode(tuple.headA, tuple.headB));
+        Tuple2<ListNode, ListNode> tuple = ListNodeUtil.buildIntersectionNodes(new int[]{1, 2, 3, 4},
+                new int[]{5, 6, 7, 8},
+                new int[]{11, 22, 33});
+        System.out.println(getIntersectionNode(tuple._1(), tuple._2()));
     }
 
     public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
