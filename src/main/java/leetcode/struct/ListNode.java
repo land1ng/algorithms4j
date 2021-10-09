@@ -4,8 +4,6 @@ import lombok.Getter;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * @author dingdong
@@ -57,9 +55,18 @@ public class ListNode implements Iterable<ListNode> {
 
     @Override
     public String toString() {
-        return StreamSupport.stream(spliterator(), false)
-                .map(ListNode::getVal)
-                .map(String::valueOf)
-                .collect(Collectors.joining(" -> "));
+        Iterator<ListNode> it = iterator();
+        Iterable<String> stringIt = () -> new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return it.hasNext();
+            }
+
+            @Override
+            public String next() {
+                return String.valueOf(it.next().val);
+            }
+        };
+        return String.join(" -> ", stringIt);
     }
 }
