@@ -1,12 +1,17 @@
 package leetcode.struct;
 
+import lombok.Getter;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * @author dingdong
  * @since 2021/4/19
  */
+@Getter
 public class ListNode implements Iterable<ListNode> {
 
     public final int val;
@@ -52,13 +57,9 @@ public class ListNode implements Iterable<ListNode> {
 
     @Override
     public String toString() {
-        final StringBuilder result = new StringBuilder();
-        this.forEach(node -> {
-            result.append(node.val);
-            if (node.next != null) {
-                result.append(" -> ");
-            }
-        });
-        return result.toString();
+        return StreamSupport.stream(spliterator(), false)
+                .map(ListNode::getVal)
+                .map(String::valueOf)
+                .collect(Collectors.joining(" -> "));
     }
 }
