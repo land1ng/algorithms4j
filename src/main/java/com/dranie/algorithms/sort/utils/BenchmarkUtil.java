@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * 性能测试工具类
@@ -41,7 +42,7 @@ public abstract class BenchmarkUtil {
             return tuple._2();
         }).map(Tuple2::_1).collect(Collectors.toList());
         // 时间复杂度比较测试
-        Arrays.asList(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
+        IntStream.of(100, 1000, 10000, 100000, 1000000, 5000000).forEach(scale -> {
             log.info("[比较测试] 数据量：{}", scale);
             compareTime(candidates, createRandom(scale));
             compareTime(candidates, createEquals(scale));
