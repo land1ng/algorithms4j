@@ -36,4 +36,20 @@ public class ReverseList {
         }
         return newHead;
     }
+
+    public static ListNode reverseList2(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode newHead = head;
+        ListNode next = head.next;
+        while (next != null) {
+            ListNode tmp = next.next;
+            next.next = newHead;
+            newHead = next;
+            next = tmp;
+        }
+        head.next = null;
+        return newHead;
+    }
 }
