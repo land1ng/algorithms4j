@@ -14,7 +14,7 @@ import java.util.List;
  * @author RanYeah
  * @since 2022/8/20
  */
-public class DpPascalTriangle {
+public class PascalTriangle {
 
     public static void main(String[] args) {
         System.out.println(generate(5));

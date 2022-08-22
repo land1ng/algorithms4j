@@ -11,7 +11,7 @@ import java.util.List;
  * @author RanYeah
  * @since 2022/8/20
  */
-public class DpPascalTriangleGetRow {
+public class PascalTriangleGetRow {
 
     public static void main(String[] args) {
         System.out.println(getRow(0));
