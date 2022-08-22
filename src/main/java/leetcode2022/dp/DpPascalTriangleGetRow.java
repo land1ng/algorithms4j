@@ -14,7 +14,11 @@ import java.util.List;
 public class DpPascalTriangleGetRow {
 
     public static void main(String[] args) {
+        System.out.println(getRow(0));
         System.out.println(getRow(1));
+        System.out.println(getRow(2));
+        System.out.println(getRow(3));
+        System.out.println(getRow(4));
     }
 
     public static List<Integer> getRow(int row) {
@@ -38,7 +42,7 @@ public class DpPascalTriangleGetRow {
         // 倒着计算当前行
         for (int i = 1; i <= row; i++) {
             res.add(0);
-            for (int j = i; j >= 0; j--) {
+            for (int j = i; j > 0; j--) {
                 //  1 3 3 1 0
                 // 1 4 6 4 1
                 // 当计算到第j项时，第j-1项还是上一行的值。
