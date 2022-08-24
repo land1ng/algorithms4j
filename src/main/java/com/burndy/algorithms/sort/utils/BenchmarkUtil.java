@@ -4,10 +4,9 @@ import com.burndy.algorithms.sort.HeapSort;
 import com.burndy.algorithms.sort.Merge;
 import com.burndy.algorithms.sort.Quick;
 import com.burndy.algorithms.sort.Shuffle;
-import com.burndy.algorithms.utils.Tuple2;
-import com.dranie.algorithms.sort.*;
 import com.burndy.algorithms.sort.base.BaseIntSort;
 import com.burndy.algorithms.sort.base.IntSort;
+import com.burndy.algorithms.utils.Tuple2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -35,7 +34,7 @@ public abstract class BenchmarkUtil {
     /**
      * 多个排序算法对比测试
      *
-     * @param algos
+     * @param algos ~
      */
     public static void comparing(BaseIntSort... algos) {
         // 正确性校验
@@ -68,13 +67,13 @@ public abstract class BenchmarkUtil {
                 result.append(" -> ");
             }
         });
-        log.info(" ===> [{}] {}", sample.name, result.toString());
+        log.info(" ===> [{}] {}", sample.name, result);
     }
 
     /**
      * 单个算法性能测试
      *
-     * @param algo
+     * @param algo ~
      */
     public static void benchmark(final BaseIntSort algo) {
         if (!checkSilent(algo)) return;
@@ -109,8 +108,8 @@ public abstract class BenchmarkUtil {
     /**
      * 使用给定数组做测试
      *
-     * @param a
-     * @param algos
+     * @param a ~
+     * @param algos ~
      */
     public static void benchmark(final int[] a, final BaseIntSort... algos) {
         Arrays.asList(algos).forEach(algo -> {
@@ -124,7 +123,7 @@ public abstract class BenchmarkUtil {
     /**
      * 和 JDK 自带排序进行比较
      *
-     * @param algo
+     * @param algo ~
      */
     public static void fuckingJDK(final BaseIntSort algo) {
         if (!checkSilent(algo)) return;
@@ -169,7 +168,7 @@ public abstract class BenchmarkUtil {
     /**
      * 校验算法正确性
      *
-     * @param algo
+     * @param algo ~
      */
     public static boolean check(final BaseIntSort algo) { return check(algo, 20); }
     public static boolean check(final BaseIntSort algo, final int n) {
