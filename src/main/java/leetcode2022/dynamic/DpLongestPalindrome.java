@@ -1,4 +1,4 @@
-package leetcode2022.dp;
+package leetcode2022.dynamic;
 
 /**
  * 最长回文子串

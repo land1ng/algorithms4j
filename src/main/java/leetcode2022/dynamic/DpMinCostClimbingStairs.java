@@ -1,4 +1,4 @@
-package leetcode2022.dp;
+package leetcode2022.dynamic;
 
 /**
  * 746. 使用最小花费爬楼梯
