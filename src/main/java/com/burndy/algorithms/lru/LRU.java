@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 /**
+ * least recently used
+ *
  * @author ran.ding
  * @since 2021/9/27
  */
