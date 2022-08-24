@@ -1,6 +1,6 @@
 package leetcode;
 
-import com.dranie.algorithms.utils.Optimizable;
+import com.burndy.algorithms.utils.Optimizable;
 
 import java.util.Random;
 

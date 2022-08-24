@@ -1,6 +1,6 @@
 package leetcode.struct;
 
-import com.dranie.algorithms.utils.Tuple2;
+import com.burndy.algorithms.utils.Tuple2;
 import lombok.experimental.UtilityClass;
 
 import java.util.Objects;

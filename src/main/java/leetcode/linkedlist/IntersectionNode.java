@@ -1,7 +1,7 @@
 package leetcode.linkedlist;
 
-import com.dranie.algorithms.utils.Tuple2;
-import com.dranie.algorithms.utils.mark.Graceful;
+import com.burndy.algorithms.utils.Tuple2;
+import com.burndy.algorithms.utils.mark.Graceful;
 import leetcode.struct.ListNode;
 import leetcode.struct.ListNodeUtil;
 
