@@ -1,5 +1,6 @@
 package leetcode.struct;
 
+import leetcode2022.bst.BstValidate;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -32,5 +33,9 @@ public class TreeNodeUtil {
         root.left = build(tree, 2 * index + 1);
         root.right = build(tree, 2 * index + 2);
         return root;
+    }
+
+    public static boolean validate(TreeNode root) {
+        return BstValidate.isValidBST(root);
     }
 }
