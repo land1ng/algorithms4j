@@ -16,12 +16,26 @@ public class BstIt {
 
     public static void main(String[] args) {
         TreeNode root = TreeNodeUtil.build(new Integer[]{ 1, null, 2, 3 });
-        System.out.println(traversal(root));
+        System.out.println(traversalInorder(root));
+        System.out.println(traversalPreorder(root));
+        System.out.println(traversalPostorder(root));
     }
 
-    public static List<Integer> traversal(TreeNode root) {
+    public static List<Integer> traversalInorder(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         inorder(root, res);
+        return res;
+    }
+
+    public static List<Integer> traversalPreorder(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        preorder(root, res);
+        return res;
+    }
+
+    public static List<Integer> traversalPostorder(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        postorder(root, res);
         return res;
     }
 
