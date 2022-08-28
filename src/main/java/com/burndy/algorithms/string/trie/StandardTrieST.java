@@ -43,6 +43,34 @@ public class StandardTrieST<V> implements TrieST<V> {
     }
 
     @Override
+    public void del(String key) {
+        root = del(root, key, 0);
+    }
+
+    private Node<V> del(Node<V> x, String key, int depth) {
+        if (x == null) {
+            return null;
+        }
+        if (depth == key.length()) {
+            // 将等于key的那个结点置为空
+            x.val = null;
+        } else {
+            char c = key.charAt(depth);
+            x.next[c] = del(x.next[c], key, depth + 1);
+        }
+        if (x.val != null) {
+            return x;
+        }
+        // 如果x的链接有一个不为空，那么原样返回x结点。
+        for (char c = 0; c < R; c++) {
+            if (x.next[c] != null) return x;
+        }
+        // 如果它的所有链接均为空，那就需要从数据结构中删去这个结点。
+        // 如果删去它使得它的父结点的所有链接也均为空，就需要继续删除它的父结点，以此类推。
+        return null;
+    }
+
+    @Override
     public void add(String key, V val) {
         this.root = add(root, key, val, 0);
     }
@@ -81,6 +109,26 @@ public class StandardTrieST<V> implements TrieST<V> {
         }
     }
 
+    @Override
+    public String longestPrefix(String s) {
+        int length = search(root, s, 0, 0);
+        return s.substring(0, length);
+    }
+
+    private int search(Node<V> x, String s, int depth, int length) {
+        if (x == null) {
+            return length;
+        }
+        if (x.val != null) {
+            length = depth;
+        }
+        if (depth == s.length()) {
+            return length;
+        }
+        char c = s.charAt(depth);
+        return search(x.next[c], s, depth + 1, length);
+    }
+
     public static void main(String[] args) {
         TrieST<Integer> trie = new StandardTrieST<>();
         trie.add("by", 1);
@@ -90,6 +138,10 @@ public class StandardTrieST<V> implements TrieST<V> {
         trie.add("shells", 1);
         trie.add("shore", 1);
         trie.add("the", 1);
-        System.out.println(trie.keys("s"));
+        System.out.println(trie.keys("sh"));
+        trie.del("she");
+        trie.del("shells");
+        trie.del("shore");
+        System.out.println(trie.keys("sh"));
     }
 }

@@ -20,6 +20,13 @@ public interface TrieST<V> {
     V get(String key);
 
     /**
+     * 删除一个键
+     *
+     * @param key 键
+     */
+    void del(String key);
+
+    /**
      * 构造
      *
      * @param key 键
@@ -35,4 +42,12 @@ public interface TrieST<V> {
      * @return ~
      */
     List<String> keys(String pre);
+
+    /**
+     * 能找到的最长前缀
+     *
+     * @param key 键
+     * @return ~
+     */
+    String longestPrefix(String key);
 }
