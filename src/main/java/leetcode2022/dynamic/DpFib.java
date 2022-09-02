@@ -4,7 +4,7 @@ package leetcode2022.dynamic;
  * 斐波那契数列
  *
  * @author RanYeah
- * @see DpClimbStairs
+ * @see ClimbStairs
  * @since 2022/8/20
  */
 public class DpFib {

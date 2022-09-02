@@ -14,7 +14,7 @@ package leetcode2022.dynamic;
  * @author RanYeah
  * @since 2022/8/20
  */
-public class DpMaxProfit {
+public class MaxProfit {
 
     public static void main(String[] args) {
 

@@ -18,7 +18,7 @@ package leetcode2022.dynamic;
  * @author RanYeah
  * @since 2022/8/20
  */
-public class DpMinCostClimbingStairs {
+public class MinCostClimbingStairs {
 
     public static int minCostClimbingStairs(int[] cost) {
 

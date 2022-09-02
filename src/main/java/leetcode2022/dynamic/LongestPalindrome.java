@@ -6,7 +6,7 @@ package leetcode2022.dynamic;
  * @author RanYeah
  * @since 2022/8/20
  */
-public class DpLongestPalindrome {
+public class LongestPalindrome {
 
     public static void main(String[] args) {
         System.out.println(longestPalindrome("babad"));

@@ -12,7 +12,7 @@ package leetcode2022.dynamic;
  * @author RanYeah
  * @since 2022/8/20
  */
-public class DpClimbStairs {
+public class ClimbStairs {
 
     public int climbStairs(int n) {
 
