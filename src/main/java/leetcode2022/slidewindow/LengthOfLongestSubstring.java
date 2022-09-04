@@ -1,4 +1,4 @@
-package leetcode2022.window;
+package leetcode2022.slidewindow;
 
 import java.util.HashMap;
 import java.util.HashSet;
